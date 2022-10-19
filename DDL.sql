@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS `Zookeepers`;
 DROP TABLE IF EXISTS `Feedings`;
 DROP TABLE IF EXISTS `Feedings_Kitchens`;
 
--- Create Diet Table
+-- Create Diets Table
 CREATE TABLE `Diets` (
     diet_id int NOT NULL AUTO_INCREMENT,
     diet_type varchar(150),
@@ -20,9 +20,9 @@ CREATE TABLE `Diets` (
 CREATE TABLE `Species` (
     species_id int NOT NULL AUTO_INCREMENT,
     species_name varchar(150) NOT NULL,
-    diet_type int,
+    diet_id int,
     PRIMARY KEY (species_id),
-    FOREIGN KEY (diet_type) REFERENCES Diets(diet_id) ON DELETE CASCADE
+    FOREIGN KEY (diet_id) REFERENCES Diets(diet_id) ON DELETE CASCADE
 );
 
 -- Create Animals Table
