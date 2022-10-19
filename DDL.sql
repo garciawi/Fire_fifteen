@@ -154,5 +154,17 @@ VALUES (
     "Hanna"
 );
 
+-- Insert Data into Kitchens
+INSERT INTO Kitchens (name)
+VALUES (
+    "Northside"
+), (
+    "Southside"
+), (
+    "Westside"
+), (
+    "Eastside"
+);
+
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
