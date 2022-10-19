@@ -106,5 +106,37 @@ VALUES (
     (SELECT diet_id FROM Diets WHERE diet_type = "Carnivores")
 );
 
+-- Insert Data into Animals
+INSERT INTO Animals (name, species_id, is_sick)
+VALUES (
+    "Mumble",
+    (SELECT species_id FROM Species WHERE species_name = "Penguin"),
+    0
+), (
+    "Lovelace",
+    (SELECT species_id FROM Species WHERE species_name = "Penguin"),
+    0
+), (
+    "Moto",
+    (SELECT species_id FROM Species WHERE species_name = "Rhinoceros"),
+    0
+), (
+    "Marty",
+    (SELECT species_id FROM Species WHERE species_name = "Zebra"),
+    0
+), (
+    "Alex",
+    (SELECT species_id FROM Species WHERE species_name = "Lion"),
+    0
+), (
+    "Gloria",
+    (SELECT species_id FROM Species WHERE species_name = "Hippopotamus"),
+    0
+), (
+    "Benjamin",
+    (SELECT species_id FROM Species WHERE species_name = "Cheetah"),
+    1
+);
+
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
