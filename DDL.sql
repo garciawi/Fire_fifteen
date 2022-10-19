@@ -74,5 +74,15 @@ CREATE TABLE `Feedings_Kitchens` (
     FOREIGN KEY (kitchen_id) REFERENCES Kitchens(kitchen_id) ON DELETE CASCADE
 );
 
+-- Insert Data into Diets Table
+INSERT INTO Diets (diet_type)
+VALUES (
+    "Herbivores"
+), (
+    "Carnivores"
+), (
+    "Omnivores"
+);
+
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
