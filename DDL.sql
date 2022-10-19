@@ -194,5 +194,24 @@ VALUES (
     "Pork shoulders and rabbit thighs."
 );
 
+-- Insert Data into Feedings_Kitchens
+INSERT INTO Feedings_Kitchens (feeding_id, kitchen_id)
+VALUES (
+    (SELECT feeding_id FROM Feedings WHERE feeding_date = '2022-10-01' AND species_id = "3"),
+    (SELECT kitchen_id FROM Kitchens WHERE name = "Southside")
+), (
+    (SELECT feeding_id FROM Feedings WHERE feeding_date = '2022-10-01' AND species_id = "1"),
+    (SELECT kitchen_id FROM Kitchens WHERE name = "Northside")
+), (
+    (SELECT feeding_id FROM Feedings WHERE feeding_date = '2022-10-03' AND species_id = "5"),
+    (SELECT kitchen_id FROM Kitchens WHERE name = "Southside")
+), (
+    (SELECT feeding_id FROM Feedings WHERE feeding_date = '2022-10-03' AND species_id = "5"),
+    (SELECT kitchen_id FROM Kitchens WHERE name = "Westside")
+), (
+    (SELECT feeding_id FROM Feedings WHERE feeding_date = '2022-10-05' AND species_id = "4"),
+    (SELECT kitchen_id FROM Kitchens WHERE name = "Eastside")
+);
+
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
