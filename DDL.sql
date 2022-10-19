@@ -1,0 +1,78 @@
+SET FOREIGN_KEY_CHECKS=0;
+SET AUTOCOMMIT = 0;
+
+DROP TABLE IF EXISTS `Diet`;
+DROP TABLE IF EXISTS `Species`;
+DROP TABLE IF EXISTS `Animals`;
+DROP TABLE IF EXISTS `Kitchens`;
+DROP TABLE IF EXISTS `Zookeepers`;
+DROP TABLE IF EXISTS `Feedings`;
+DROP TABLE IF EXISTS `Feedings_Kitchens`;
+
+-- Create Diet Table
+CREATE TABLE `Diet` (
+    diet_id int NOT NULL AUTO_INCREMENT,
+    diet_type varchar(150),
+    PRIMARY KEY (diet_id)
+);
+
+-- Create Species Table
+CREATE TABLE `Species` (
+    species_id int NOT NULL AUTO_INCREMENT,
+    species_name varchar(150) NOT NULL,
+    diet_type int,
+    PRIMARY KEY (species_id),
+    FOREIGN KEY (diet_type) REFERENCES Diet(diet_id) ON DELETE CASCADE
+);
+
+-- Create Animals Table
+CREATE TABLE `Animals` (
+    animal_id int NOT NULL AUTO_INCREMENT,
+    name varchar(150) NOT NULL,
+    species_id int NOT NULL,
+    is_sick BOOLEAN NOT NULL DEFAULT 0,
+    PRIMARY KEY (animal_id),
+    FOREIGN KEY (species_id) REFERENCES Species(species_id) ON DELETE CASCADE
+);
+
+-- Create Kitchens Table
+CREATE TABLE `Kitchens` (
+    kitchen_id int NOT NULL AUTO_INCREMENT,
+    name varchar(150) NOT NULL,
+    PRIMARY KEY (kitchen_id)
+);
+
+-- Create Zookeepers Table
+CREATE TABLE `Zookeepers` (
+    zookeeper_id int NOT NULL AUTO_INCREMENT,
+    first_name varchar(255) NOT NULL,
+    last_name varchar(255) NOT NULL,
+    PRIMARY KEY (zookeeper_id),
+    CONSTRAINT full_name UNIQUE (first_name, last_name)
+);
+
+-- Create Feedings Table
+CREATE TABLE `Feedings` (
+    feeding_id int NOT NULL AUTO_INCREMENT,
+    species_id int NOT NULL,
+    zookeeper_id int NOT NULL,
+    feeding_date DATE NOT NULL,
+    feeding_time TIME NOT NULL,
+    feeding_description TEXT,
+    PRIMARY KEY (feeding_id),
+    FOREIGN KEY (species_id) REFERENCES Species(species_id) ON DELETE CASCADE,
+    FOREIGN KEY (zookeeper_id) REFERENCES Zookeepers(zookeeper_id) ON DELETE CASCADE
+);
+
+-- Create Feedings_Kitchens Table
+CREATE TABLE `Feedings_Kitchens` (
+    feeding_kitchen_id int NOT NULL AUTO_INCREMENT,
+    feeding_id int NOT NULL,
+    kitchen_id int NOT NULL,
+    PRIMARY KEY (feeding_kitchen_id),
+    FOREIGN KEY (feeding_id) REFERENCES Feedings(feeding_id) ON DELETE CASCADE,
+    FOREIGN KEY (kitchen_id) REFERENCES Kitchens(kitchen_id) ON DELETE CASCADE
+);
+
+SET FOREIGN_KEY_CHECKS=1;
+COMMIT;
