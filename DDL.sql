@@ -1,7 +1,7 @@
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
-DROP TABLE IF EXISTS `Diet`;
+DROP TABLE IF EXISTS `Diets`;
 DROP TABLE IF EXISTS `Species`;
 DROP TABLE IF EXISTS `Animals`;
 DROP TABLE IF EXISTS `Kitchens`;
@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS `Feedings`;
 DROP TABLE IF EXISTS `Feedings_Kitchens`;
 
 -- Create Diet Table
-CREATE TABLE `Diet` (
+CREATE TABLE `Diets` (
     diet_id int NOT NULL AUTO_INCREMENT,
     diet_type varchar(150),
     PRIMARY KEY (diet_id)
@@ -22,7 +22,7 @@ CREATE TABLE `Species` (
     species_name varchar(150) NOT NULL,
     diet_type int,
     PRIMARY KEY (species_id),
-    FOREIGN KEY (diet_type) REFERENCES Diet(diet_id) ON DELETE CASCADE
+    FOREIGN KEY (diet_type) REFERENCES Diets(diet_id) ON DELETE CASCADE
 );
 
 -- Create Animals Table
