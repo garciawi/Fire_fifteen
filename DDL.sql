@@ -166,5 +166,33 @@ VALUES (
     "Eastside"
 );
 
+-- Insert Data into Feedings
+INSERT INTO Feedings (species_id, zookeeper_id, feeding_date, feeding_time, feeding_description)
+VALUES (
+    (SELECT species_id FROM Species WHERE species_name = "Zebra"),
+    (SELECT zookeeper_id FROM Zookeepers WHERE first_name = "Jack" AND last_name = "Hanna"),
+    '2022-10-01',
+    '13:30:10',
+    "Grass in water."
+), (
+    (SELECT species_id FROM Species WHERE species_name = "Penguin"),
+    (SELECT zookeeper_id FROM Zookeepers WHERE first_name = "David" AND last_name = "Attenborough"),
+    '2022-10-01',
+    '10:15:45',
+    "Sardines, achovies, and blended krills."
+), (
+    (SELECT species_id FROM Species WHERE species_name = "Hippopotamus"),
+    (SELECT zookeeper_id FROM Zookeepers WHERE first_name = "Steve" AND last_name = "Irwin"),
+    '2022-10-03',
+    '12:05:22',
+    "Grass and a few watermelons."
+), (
+    (SELECT species_id FROM Species WHERE species_name = "Lion"),
+    (SELECT zookeeper_id FROM Zookeepers WHERE first_name = "Jack" AND last_name = "Hanna"),
+    '2022-10-05',
+    '14:35:30',
+    "Pork shoulders and rabbit thighs."
+);
+
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
