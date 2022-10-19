@@ -138,5 +138,21 @@ VALUES (
     1
 );
 
+-- Insert Data into Zookeepers
+INSERT INTO Zookeepers (first_name, last_name)
+VALUES (
+    "Steve",
+    "Irwin"
+), (
+    "Jane",
+    "Goodall"
+), (
+    "David",
+    "Attenborough"
+), (
+    "Jack",
+    "Hanna"
+);
+
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
