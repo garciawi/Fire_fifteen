@@ -84,5 +84,27 @@ VALUES (
     "Omnivores"
 );
 
+-- Insert Data into Species
+INSERT INTO Species (species_name, diet_id)
+VALUES (
+    "Penguin",
+    (SELECT diet_id FROM Diets WHERE diet_type = "Carnivores")
+), (
+    "Rhinoceros",
+    (SELECT diet_id FROM Diets WHERE diet_type = "Herbivores")
+), (
+    "Zebra",
+    (SELECT diet_id FROM Diets WHERE diet_type = "Herbivores")
+), (
+    "Lion",
+    (SELECT diet_id FROM Diets WHERE diet_type = "Carnivores")
+), (
+    "Hippopotamus",
+    (SELECT diet_id FROM Diets WHERE diet_type = "Omnivores")
+), (
+    "Cheetah",
+    (SELECT diet_id FROM Diets WHERE diet_type = "Carnivores")
+);
+
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
