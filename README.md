@@ -13,11 +13,11 @@ investigation stage and result in prompt intervention and treatment when an illn
 # Outline
 ● Species: records the species of the animals at the zoo.
 
-  ○ species_id: int, auto_increment, unique, NOT NULL, PK
-  ○ species_name: varchar(150), unique, NOT NULL
-  ○ Relationship: A 1:M relationship between Species and Feedings. A single
-    Species can be associated with multiple Feedings but each Feeding can only be used to
-    feed one Species.
+  &emsp;○ species_id: int, auto_increment, unique, NOT NULL, PK
+  &emsp;○ species_name: varchar(150), unique, NOT NULL
+  &emsp;○ Relationship: A 1:M relationship between Species and Feedings. A single
+    &emsp;Species can be associated with multiple Feedings but each Feeding can only be used to
+    &emsp;feed one Species.
 
 ● Diets: records the type of diet a species consumes.
   ○ diet_id : int, auto_increment, unique, NOT NULL, PK
