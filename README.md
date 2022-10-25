@@ -50,7 +50,7 @@ investigation stage and result in prompt intervention and treatment when an illn
   
   &emsp;○ species_id: int, NOT NULL, FK
   
-  &emsp;○ zookeeper_id: int, NOT NULL, FK
+  &emsp;○ zookeeper_id: int, FK
   
   &emsp;○ feeding_date: date, NOT NULL
   
