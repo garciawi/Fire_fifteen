@@ -22,7 +22,7 @@ CREATE TABLE `Species` (
     species_name varchar(150) NOT NULL,
     diet_id int,
     PRIMARY KEY (species_id),
-    FOREIGN KEY (diet_id) REFERENCES Diets(diet_id) ON DELETE CASCADE
+    FOREIGN KEY (diet_id) REFERENCES Diets(diet_id) ON DELETE SET NULL
 );
 
 -- Create Animals Table
@@ -61,7 +61,7 @@ CREATE TABLE `Feedings` (
     feeding_description TEXT,
     PRIMARY KEY (feeding_id),
     FOREIGN KEY (species_id) REFERENCES Species(species_id) ON DELETE CASCADE,
-    FOREIGN KEY (zookeeper_id) REFERENCES Zookeepers(zookeeper_id) ON DELETE CASCADE
+    FOREIGN KEY (zookeeper_id) REFERENCES Zookeepers(zookeeper_id) ON DELETE SET NULL
 );
 
 -- Create Feedings_Kitchens Table
