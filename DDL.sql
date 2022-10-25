@@ -55,7 +55,7 @@ CREATE TABLE `Zookeepers` (
 CREATE TABLE `Feedings` (
     feeding_id int NOT NULL AUTO_INCREMENT,
     species_id int NOT NULL,
-    zookeeper_id int NOT NULL,
+    zookeeper_id int,
     feeding_date DATE NOT NULL,
     feeding_time TIME NOT NULL,
     feeding_description TEXT,
