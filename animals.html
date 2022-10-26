@@ -5,11 +5,13 @@
 <body>
 <h1>Animals</h1>
 [ <a href="animals.html">Animals</a> | <a href="diets.html">Diets</a> | <a href="feedings.html">Feedings</a> | <a href="kitchens.html">Kitchens</a> | <a href="species.html">Species</a> | <a href="zookeepers.html">Zookeepers</a>]
+[ <a href="index.html">Home Page</a> | <a href="animals.html">Animals</a> | <a href="species.html">Species</a> 
+  | <a href="diets.html">Diets</a> | <a href="feedings.html">Feedings</a> | <a href="feedings_kitchens.html">Feedings_Kitchens</a> 
+  | <a href="kitchens.html">Kitchens</a> | <a href="zookeepers.html">Zookeepers</a>]
 <p><strong>Browse Animals</strong></p>
 <table border="1" cellpadding="5">
     <tr>
-        <th><a href="#">Update</a></th>
-        <th><a href="#">Remove</a></th>
+        <th><a href="#">New</a></th>
         <th>Animal ID</th>
         <th>Species</th>
         <th>Name</th>
@@ -48,10 +50,7 @@
           <fieldset class="fields">
             <label> Species </label> <input type="text" name="species">
             <label> Name </label> <input type="text" name="name">
-            <label> Sick </label> <select name="sick">
-            	<option value="0">No</option>
-                <option value="1">Yes</option>
-                </select>
+            <label> Sick </label> <input type="text" name="sick">
           </fieldset>
           <input class="btn" type="submit" id="addAnimal" value="Add an animal">
           <input class="btn" type="button" value="cancel">
@@ -65,10 +64,7 @@
           <label>ID:</label> 1
             <label> Name </label> <input type="text" value="Moto" name="name">
             <label> Species </label> <input type="text"  name="species" value="Rhinoceros">
-            <label> Sick </label> <select name="sick">
-            	<option value="0">No</option>
-              <option value="1">Yes</option>
-              </select>
+            <label> Sick </label> <input type="text" name="sick" value="No">
     </fieldset>
     <input class="btn" type="submit" id="UpdateSaveAnimal" value="Save Update Animal">
           <input class="btn" type="button" value="cancel" >
