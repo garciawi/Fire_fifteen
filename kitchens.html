@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>Kitchens</title>
+    </head>
+
+    <body>
+        <h1>Fire Zoo</h1>
+
+        [ <a href="index.html">Home Page</a> | <a href="animals.html">Animals</a> | <a href="species.html">Species</a> 
+        | <a href="diets.html">Diets</a> | <a href="feedings.html">Feedings</a> | <a href="feedings_kitchens.html">Feedings_Kitchens</a> 
+        | <a href="kitchens.html">Kitchens</a> | <a href="zookeepers.html">Zookeepers</a>]
+
+        <h2>Kitchens</h2>
+        <div id="browse">
+        <table border="1">
+            <tr>
+                <th>Id</th>
+                <th>Kitchen Name</th>
+                <th>Delete</th>
+            </tr>
+            <tr>
+                <td align="middle">1</td>
+                <td align="middle">Northside</td>
+                <td align="middle">
+                    <button>Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td align="middle">2</td>
+                <td align="middle">Southside</td>
+                <td align="middle">
+                    <button>Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td align="middle">3</td>
+                <td align="middle">Westside</td>
+                <td align="middle">
+                    <button>Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td align="middle">4</td>
+                <td align="middle">Eastside</td>
+                <td align="middle">
+                    <button>Delete</button>
+                </td>
+            </tr>
+        </table>
+        <p>&nbsp;</p>
+        </div>
+        <div id="add">
+            <form>
+                <fieldset>
+                    <legend><strong>Add a Kitchen</strong></legend>
+                    <label>Name:</label><br><input name="name"><br> *Required
+                    <p><input class="btn" type="submit" id="addKitchen" value="Create"></p>
+                </fieldset>
+            </form>
+        <p>&nbsp;</p>
+        </div>
+        <div id="delete">
+            <form>
+                <fieldset>
+                    <legend><strong>Delete a Kitchen</strong></legend>
+                    <label>Name:</label>
+                    <select name="name">
+                        <option value="1">Northside</option>
+                        <option value="2">Southside</option>
+                        <option value="3">Westside</option>
+                        <option value="4">Eastside</option>
+                    </select>
+                    <p><input class="btn" type="submit" id="deleteKitchen" value="Delete"></p>
+                </fieldset>
+            </form>
+        </div>
+    </body>
+    <footer>
+        © 2022 Anh Tuyet Vo, William Garcia
+    </footer>
+</html>

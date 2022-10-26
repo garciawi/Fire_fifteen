@@ -1,0 +1,176 @@
+<html>
+    <head>
+        <title>Feedings</title>
+    </head>
+
+    <body>
+        <h1>Fire Zoo</h1>
+
+        [ <a href="index.html">Home Page</a> | <a href="animals.html">Animals</a> | <a href="species.html">Species</a> 
+        | <a href="diets.html">Diets</a> | <a href="feedings.html">Feedings</a> | <a href="feedings_kitchens.html">Feedings_Kitchens</a> 
+        | <a href="kitchens.html">Kitchens</a> | <a href="zookeepers.html">Zookeepers</a>]
+
+        <h2>Feedings</h2>
+        <div id="browse">
+            <table border="1" cellpadding="5">
+                <tr>
+                    <th>Id</th>
+                    <th>Zookeeper Id</th>
+                    <th>Species Id</th>
+                    <th>Species Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Description</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <td align="middle">1</td>
+                    <td align="middle">4</td>
+                    <td align="middle">3</td>
+                    <td align="middle">Zebra</td>
+                    <td align="middle">2022-10-01</td>
+                    <td align="middle">13:30:10</td>
+                    <td align="middle">Grass in water.</td>
+                    <td align="middle">
+                        <button>Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="middle">2</td>
+                    <td align="middle">3</td>
+                    <td align="middle">1</td>
+                    <td align="middle">Penguin</td>
+                    <td align="middle">2022-10-01</td>
+                    <td align="middle">10:15:45</td>
+                    <td align="middle">Sardines, achovies, and blended krills.</td>
+                    <td align="middle">
+                        <button>Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="middle">3</td>
+                    <td align="middle">1</td>
+                    <td align="middle">5</td>
+                    <td align="middle">Hippopotamus</td>
+                    <td align="middle">2022-10-03</td>
+                    <td align="middle">12:05:22</td>
+                    <td align="middle">Grass and a few watermelons.</td>
+                    <td align="middle">
+                        <button>Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="middle">4</td>
+                    <td align="middle">4</td>
+                    <td align="middle">4</td>
+                    <td align="middle">Lion</td>
+                    <td align="middle">2022-10-05</td>
+                    <td align="middle">14:35:30</td>
+                    <td align="middle">Pork shoulders and rabbit thighs.</td>
+                    <td align="middle">
+                        <button>Delete</button>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+        </div>
+        <div id="search">
+            <form>
+                <fieldset>
+                    <legend><strong>Search Feeding</strong></legend>
+                    <label>Search Species Name: </label> <input type="text" name="last_name">
+                    <p><input class="btn" type="button" value="Search"></p>
+                </fieldset>
+            </form>
+            <p>&nbsp;</p>
+        </div>
+        <div id="add">
+            <form>
+                <fieldset>
+                    <legend><strong>Add a Feeding</strong></legend>
+                    <label>Zookeeper: </label>
+                        <select name="zookeeper_id">
+                            <option value="0">None</option>
+                            <option value="1">1: Steve Irwin</option>
+                            <option value="2">2: Jane Goodall</option>
+                            <option value="3">3: David Attenborough</option>
+                            <option value="4">4: Jack Hanna</option>
+                        </select>
+                    <p>
+                        <label>Species</label>
+                        <select name="species_id">
+                            <option value="1">1: Penguin</option>
+                            <option value="2">2: Rhinoceros</option>
+                            <option value="3">3: Zebra</option>
+                            <option value="4">4: Lion</option>
+                            <option value="5">5: Hippopotamus</option>
+                            <option value="6">6: Cheetah</option>
+                        </select>
+                        *Required
+                    </p>
+                    <p>
+                        <label>Date:</label> <input type="text" name="date"> *Required
+                    </p>
+                    <p>
+                        <label>Time:</label> <input type="text" name="date"> *Required
+                    </p>
+                    <p>
+                        <label>Description: </label> <input type="text" name="date">
+                    </p>
+                    <p><input class="btn" type="button" value="Create"></p>
+                </fieldset>
+            </form>
+            <p>&nbsp;</p>
+        </div>
+        <div id="update">
+            <form>
+                <fieldset>
+                    <legend><strong>Update Feeding</strong></legend>
+                    <label>Feeding Id: </label>
+                        <select name="feeding_id">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                        *Required
+                    <p>
+                        <label>Zookeeper: </label>
+                        <select name="zookeeper_id">
+                            <option value="0">None</option>
+                            <option value="1">1: Steve Irwin</option>
+                            <option value="2">2: Jane Goodall</option>
+                            <option value="3">3: David Attenborough</option>
+                            <option value="4">4: Jack Hanna</option>
+                        </select>
+                    </p>
+                     <p>
+                        <label>Species</label>
+                        <select name="species_id">
+                            <option value="1">1: Penguin</option>
+                            <option value="2">2: Rhinoceros</option>
+                            <option value="3">3: Zebra</option>
+                            <option value="4">4: Lion</option>
+                            <option value="5">5: Hippopotamus</option>
+                            <option value="6">6: Cheetah</option>
+                        </select>
+                        *Required
+                    </p>
+                    <p>
+                        <label>Date:</label> <input type="text" name="date"> *Required
+                    </p>
+                    <p>
+                        <label>Time:</label> <input type="text" name="date"> *Required
+                    </p>
+                    <p>
+                        <label>Description: </label> <input type="text" name="date">
+                    </p>
+                    <p><input class="btn" type="button" value="Update"></p>
+                </fieldset>
+            </form>
+        </div>
+    </body>
+    <footer>
+        © 2022 Anh Tuyet Vo, William Garcia
+    </footer>
+</html>
