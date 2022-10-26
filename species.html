@@ -3,48 +3,63 @@
 <title>Species</title>
 </head>
 <body>
-<h1>Species</h1>
-[ <a href="animals.html">Animals</a> | <a href="diets.html">Diets</a> | <a href="feedings.html">Feedings</a> | <a href="kitchens.html">Kitchens</a> | <a href="species.html">Species</a> | <a href="zookeepers.html">Zookeepers</a>]
-<p><strong>Browse Species</strong></p>
+<h1>Fire Zoo</h1>
+    [ <a href="index.html">Home Page</a> | <a href="animals.html">Animals</a> | <a href="species.html">Species</a> 
+    | <a href="diets.html">Diets</a> | <a href="feedings.html">Feedings</a> | <a href="feedings_kitchens.html">Feedings_Kitchens</a> 
+    | <a href="kitchens.html">Kitchens</a> | <a href="zookeepers.html">Zookeepers</a>]
+<h2>Species</h2>
 <table border="1" cellpadding="5">
     <tr>
         <th>Species ID</th>
         <th>Species Name</th>
         <th>Diet</th>
+        <th>Delete</th>
     </tr>
     <tr>
         <td>1</td>
         <td>Penguin</td>
         <td>Carnivores</td>
+        <td align="middle">
+            <button>Delete</button>
+        </td>
     </tr>
     <tr>
         <td>2</td>
         <td>Rhinoceros</td>
         <td>Herbivores</td>
+        <td align="middle">
+            <button>Delete</button>
+        </td>
     </tr>
     <tr>
         <td>6</td>
         <td>Cheetah</td>
         <td>Carnivores</td>
+        <td align="middle">
+            <button>Delete</button>
+        </td>
     </tr>
 </table>
 <p>&nbsp;</p>
 </div>
 <div id="insert" style="display: block">
     <form id="addSpecies">
-        <legend><strong>Add Species</strong></legend>
           <fieldset class="fields">
+            <legend><strong>Add Species</strong></legend>
             <label> Species Name </label> <input type="text" name="species_name">
-            <label> Diet Type </label> <select name="diet_type">
+            <p></p><label> Diet Type </label> <select name="diet_type">
             	<option value="0">&nbsp;</option>
                 <option value="1">Herbivores</option>
                 <option value="2">Carnivores</option>
                 <option value="3">Omnivores</option>
                 </select>
+            <p></p><input class="btn" type="submit" id="addSpecies" value="Add a Species">
           </fieldset>
-          <input class="btn" type="submit" id="addSpecies" value="Add a Species">
-          <input class="btn" type="button" value="cancel">
 	</form> <!--add new species-->
 </div><!-- insert -->
 </body>
+<p></p>
+<footer>
+    © 2022 Anh Tuyet Vo, William Garcia
+</footer>
 </html>
