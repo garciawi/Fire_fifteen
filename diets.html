@@ -3,40 +3,52 @@
 <title>Diets</title>
 </head>
 <body>
-<h1>Diets</h1>
-[ <a href="animals.html">Animals</a> | <a href="diets.html">Diets</a> | <a href="feedings.html">Feedings</a> | <a href="kitchens.html">Kitchens</a> | <a href="species.html">Species</a> | <a href="zookeepers.html">Zookeepers</a>]
-<p><strong>Browse Diets</strong></p>
+<h1>Fire Zoo</h1>
+    [ <a href="index.html">Home Page</a> | <a href="animals.html">Animals</a> | <a href="species.html">Species</a> 
+    | <a href="diets.html">Diets</a> | <a href="feedings.html">Feedings</a> | <a href="feedings_kitchens.html">Feedings_Kitchens</a> 
+    | <a href="kitchens.html">Kitchens</a> | <a href="zookeepers.html">Zookeepers</a>]
+<h2>Diets</h2>
 <table border="1" cellpadding="5">
     <tr>
         <th>Diet ID</th>
         <th>Diet Name</th>
+        <th>Delete</th>
     </tr>
     <tr>
         <td>1</td>
         <td>Herbivores</td>
+        <td align="middle">
+            <button>Delete</button>
+        </td>
     </tr>
     <tr>
         <td>2</td>
         <td>Carnivores</td>
+        <td align="middle">
+            <button>Delete</button>
+        </td>
     </tr>
     <tr>
         <td>3</td>
         <td>Omnivores</td>
+        <td align="middle">
+            <button>Delete</button>
+        </td>
     </tr>
 </table>
 <p>&nbsp;</p>
 </div>
 <div id="insert" style="display: block">
     <form id="addDiet">
-        <legend><strong>Add Diet</strong></legend>
           <fieldset class="fields">
-            <label> Diet Name </label> <input type="text" name="diet_name">
+            <legend><strong>Add Diet</strong></legend>
+            <label>Diet Name: </label> <input type="text" name="diet_name">
+            <p></p><input class="btn" type="submit" id="addDiet" value="Add a diet">
           </fieldset>
-          <input class="btn" type="submit" id="addDiet" value="Add a diet">
-          <input class="btn" type="button" value="cancel">
 	</form> <!--add new diet-->
-</div><!-- insert -->
-
-
+    <p></p>
+    <footer>
+        © 2022 Anh Tuyet Vo, William Garcia
+    </footer>
 </body>
 </html>
