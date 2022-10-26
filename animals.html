@@ -3,85 +3,104 @@
 <title>Animals</title>
 </head>
 <body>
-<h1>Animals</h1>
+<h1>Fire Zoo</h1>
 [ <a href="index.html">Home Page</a> | <a href="animals.html">Animals</a> | <a href="species.html">Species</a> 
   | <a href="diets.html">Diets</a> | <a href="feedings.html">Feedings</a> | <a href="feedings_kitchens.html">Feedings_Kitchens</a> 
   | <a href="kitchens.html">Kitchens</a> | <a href="zookeepers.html">Zookeepers</a>]
-<p><strong>Browse Animals</strong></p>
+<h2>Animals</h2>
 <table border="1" cellpadding="5">
     <tr>
-        <th><a href="#">New</a></th>
         <th>Animal ID</th>
         <th>Species</th>
         <th>Name</th>
         <th>Sick</th>
+        <th>Delete</th>
     </tr>
     <tr>
-        <td><a href="#">Edit</a></td>
-        <td><a href="#">Delete</a></td>
         <td>1</td>
         <td>Penguin</td>
         <td>Mumble</td>
         <td>No</td>
+        <td align="middle">
+          <button>Delete</button>
+      </td>
     </tr>
     <tr>
-        <td><a href="#">Edit</a></td>
-        <td><a href="#">Delete</a></td>
         <td>3</td>
         <td>Rhinoceros</td>
         <td>Moto</td>
         <td>No</td>
+        <td align="middle">
+          <button>Delete</button>
+      </td>
     </tr>
     <tr>
-        <td><a href="#">Edit</a></td>
-        <td><a href="#">Delete</a></td>
         <td>7</td>
         <td>Cheetah</td>
         <td>Benjamin</td>
         <td>No</td>
+        <td align="middle">
+          <button>Delete</button>
+      </td>
     </tr>
 </table>
 <p>&nbsp;</p>
 </div>
 <div id="insert" style="display: block">
     <form id="addAnimal">
-        <legend><strong>Add Animal</strong></legend>
           <fieldset class="fields">
-            <label> Species </label> <input type="text" name="species">
-            <label> Name </label> <input type="text" name="name">
-            <label> Sick </label> <input type="text" name="sick">
+            <legend><strong>Add Animal</strong></legend>
+            <label>Species: </label>
+              <select name="species_id">
+                <option value="1">Penguin</option>
+                <option value="2">Rhinoceros</option>
+                <option value="3">Zebra</option>
+                <option value="4">Lion</option>
+                <option value="5">Hippopotamus</option>
+                <option value="6">Cheetah</option>
+              </select>
+            <p></p><label>Name: </label> <input type="text" name="name">
+            <p></p><label>Sick: </label>
+              <select name="is_sick">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            <p></p><input class="btn" type="submit" id="addAnimal" value="Add an animal">
           </fieldset>
-          <input class="btn" type="submit" id="addAnimal" value="Add an animal">
-          <input class="btn" type="button" value="cancel">
 	</form> <!--add new animal-->
 </div><!-- insert -->
 <p>&nbsp;</p>
 <div id="update" style="display: block">
   <form id="updateAnimal">
-      <legend><strong>Update Animal</strong></legend>
           <fieldset class="fields">
-          <label>ID:</label> 1
-            <label> Name </label> <input type="text" value="Moto" name="name">
-            <label> Species </label> <input type="text"  name="species" value="Rhinoceros">
-            <label> Sick </label> <input type="text" name="sick" value="No">
+          <legend><strong>Update Animal</strong></legend>
+          <label>ID:</label>
+            <select name="animal_id">
+              <option value="1">1</option>
+              <option value="3">3</option>
+              <option value="7">7</option>
+            </select>
+          <p></p><label>Name: </label> <input type="text" name="name">
+          <p></p><label>Species: </label>
+            <select name="species_id">
+              <option value="1">Penguin</option>
+              <option value="2">Rhinoceros</option>
+              <option value="3">Zebra</option>
+              <option value="4">Lion</option>
+              <option value="5">Hippopotamus</option>
+              <option value="6">Cheetah</option>
+            </select>
+          <p></p><label>Sick: </label>
+            <select name="is_sick">
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+      <p></p><input class="btn" type="submit" id="UpdateSaveAnimal" value="Save Update Animal">
     </fieldset>
-    <input class="btn" type="submit" id="UpdateSaveAnimal" value="Save Update Animal">
-          <input class="btn" type="button" value="cancel" >
   </form> 
 </div><!-- update -->
-<p>&nbsp;</p>
-<div id="delete" style="display: block">
-    <form id="deleteAnimal">
-        <legend><strong>Delete Animal</strong></legend>
-            <fieldset class="fields">
-            <p>Are you sure you wish to delete the following?</p>
-            <label>Species</label> Rhinoceros
-              <label> Name </label> Moto
-              
-      </fieldset>
-      <input class="btn" type="submit" id="DeleteAnimal" value="Delete Animal">
-            <input class="btn" type="button" value="cancel" >
-    </form> 
-  </div><!-- delete -->
 </body>
+<footer>
+  © 2022 Anh Tuyet Vo, William Garcia
+</footer>
 </html>
