@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Zookeepers</title>
+</head>
+<body>
+<h1>Animals</h1>
+[ <a href="animals.html">Animals</a> | <a href="diets.html">Diets</a> | <a href="feedings.html">Feedings</a> | <a href="kitchens.html">Kitchens</a> | <a href="species.html">Species</a> | <a href="zookeepers.html">Zookeepers</a>]
+<p><strong>Browse Zookeepers</strong></p>
+<table border="1" cellpadding="5">
+    <tr>
+        <th><a href="#">New</a></th>
+        <th>Zookeeper ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </tr>
+    <tr>
+        <td><a href="#">Delete</a></td>
+        <td>1</td>
+        <td>Steve</td>
+        <td>Irwin</td>
+    </tr>
+    <tr>
+        <td><a href="#">Delete</a></td>
+        <td>2</td>
+        <td>Jane</td>
+        <td>Goodall</td>
+    </tr>
+    <tr>
+        <td><a href="#">Delete</a></td>
+        <td>3</td>
+        <td>David</td>
+        <td>Attenborough</td>
+    </tr>
+</table>
+<p>&nbsp;</p>
+</div>
+<div id="insert" style="display: block">
+    <form id="addZookeepers">
+        <legend><strong>Add Zookeeper</strong></legend>
+          <fieldset class="fields">
+            <label> First Name </label> <input type="text" name="first_name">
+            <label> Last Name </label> <input type="text" name="last_name">
+          </fieldset>
+          <input class="btn" type="submit" id="addZookeeper" value="Add a zookeeper">
+          <input class="btn" type="button" value="cancel">
+	</form> <!--add new animal-->
+</div><!-- insert -->
+<p>&nbsp;</p>
+<div id="delete" style="display: block">
+    <form id="deleteZookeeper">
+        <legend><strong>Delete Zookeeper</strong></legend>
+            <fieldset class="fields">
+            <p>Are you sure you wish to delete the following?</p>
+            <label> First Name:</label> Samuel
+              <label> Last Name:</label> Register
+              
+      </fieldset>
+      <input class="btn" type="submit" id="DeleteZookeeper" value="Delete a Zookeeper">
+            <input class="btn" type="button" value="cancel" >
+    </form> 
+  </div><!-- delete -->
+</body>
+</html>
