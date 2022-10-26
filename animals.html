@@ -47,7 +47,10 @@
           <fieldset class="fields">
             <label> Species </label> <input type="text" name="species">
             <label> Name </label> <input type="text" name="name">
-            <label> Sick </label> <input type="text" name="sick">
+            <label> Sick </label> <select name="sick">
+            	<option value="0">No</option>
+                <option value="1">Yes</option>
+                </select>
           </fieldset>
           <input class="btn" type="submit" id="addAnimal" value="Add an animal">
           <input class="btn" type="button" value="cancel">
@@ -61,7 +64,10 @@
           <label>ID:</label> 1
             <label> Name </label> <input type="text" value="Moto" name="name">
             <label> Species </label> <input type="text"  name="species" value="Rhinoceros">
-            <label> Sick </label> <input type="text" name="sick" value="No">
+            <label> Sick </label> <select name="sick">
+            	<option value="0">No</option>
+              <option value="1">Yes</option>
+              </select>
     </fieldset>
     <input class="btn" type="submit" id="UpdateSaveAnimal" value="Save Update Animal">
           <input class="btn" type="button" value="cancel" >
