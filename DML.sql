@@ -61,3 +61,35 @@ INNER JOIN Kitchens ON Feedings_Kitchens.kitchen_id = Kitchens.kitchen_id;
 -- Dis-associate a kitchen from a feeding (M-to-M relationship deletion)
 DELETE FROM Feedings_Kitchens WHERE feeding_id = :feeding_id_selected_from_dropdown AND kitchen_id = :kitchen_id_selected_from_dropdown;
 
+-- insert a new animal to the animal table
+INSERT INTO Animals(animal_id, name, species_id, is_sick)
+VALUES (:animal_id_input, :name_input, :species_id_input, :is_sick_input);
+
+-- display table with animal id, species, name, is_sick status
+SELECT Animals.animal_id, Species.species_name, Animals.name, Animals.is_sick 
+FROM Animals JOIN Species ON Animals.species_id = Species.species_id;
+
+-- search for animal by animal name
+SELECT Animals.animal_id AS ID, Species.species_id as Species, Animals.name AS Name, Animals.is_sick as Sick 
+FROM Animals JOIN Species ON Animals.species_id = Species.species_id AND Animals.name = :name;
+
+-- update an animal 
+UPDATE Animals
+SET name = :name_input, species_id = :species_id_from_dropdown, is_sick = :is_sick_input 
+WHERE animal_id = :animal_id_from_dropdown;
+
+-- add a new species
+INSERT INTO SPECIES(species_name, diet_id)
+VALUES (:species_name_input, :diet_id_from_dropdown)
+
+-- display table with species_id, species_name, & diet
+SELECT Species.species_id AS ID, Species.species_name AS "Species Name", Diets.diet_type AS Diets 
+FROM Species JOIN Diets ON Species.diet_id = Diets.diet_id;
+
+-- add a new diet
+INSERT INTO DIETS(diet_type) 
+VALUES (:diet_name);
+
+-- display table with diet_id and diet_name
+SELECT Diets.diet_id AS ID, Diets.diet_type AS DIET 
+FROM Diets;
