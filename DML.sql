@@ -69,10 +69,6 @@ VALUES (:animal_id_input, :name_input, :species_id_input, :is_sick_input);
 SELECT Animals.animal_id, Species.species_name, Animals.name, Animals.is_sick 
 FROM Animals JOIN Species ON Animals.species_id = Species.species_id;
 
--- search for animal by animal name
-SELECT Animals.animal_id AS ID, Species.species_id AS Species, Animals.name AS Name, Animals.is_sick as Sick 
-FROM Animals JOIN Species ON Animals.species_id = Species.species_id AND Animals.name = :name;
-
 -- update an animal 
 UPDATE Animals
 SET name = :name_input, species_id = :species_id_from_dropdown, is_sick = :is_sick_input 
