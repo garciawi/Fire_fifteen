@@ -58,8 +58,12 @@ Feedings_Kitchens.kitchen_id AS "Kitchen Id", Kitchens.name AS "Kitchen Name"
 FROM Feedings_Kitchens
 INNER JOIN Kitchens ON Feedings_Kitchens.kitchen_id = Kitchens.kitchen_id;
 
+-- Add a Feedings_Kitchen entry
+INSERT INTO Feedings_Kitchen (feeding_id, kitchen_id)
+VALUES (:feeding_id_from_dropdown, :kitchen_id_from_dropdown)
+
 -- Dis-associate a kitchen from a feeding (M-to-M relationship deletion)
-DELETE FROM Feedings_Kitchens WHERE feeding_id = :feeding_id_selected_from_dropdown AND kitchen_id = :kitchen_id_selected_from_dropdown;
+DELETE FROM Feedings_Kitchens WHERE feeding_id = :feeding_id_selected_from_dropdown AND kitchen_id = :kitchen_id_from_dropdown;
 
 -- insert a new animal to the animal table
 INSERT INTO Animals(animal_id, name, species_id, is_sick)
