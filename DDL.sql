@@ -179,7 +179,7 @@ VALUES (
     (SELECT zookeeper_id FROM Zookeepers WHERE first_name = "David" AND last_name = "Attenborough"),
     '2022-10-01',
     '10:15:45',
-    "Sardines, achovies, and blended krills."
+    "Sardines, anchovies, and blended krills."
 ), (
     (SELECT species_id FROM Species WHERE species_name = "Hippopotamus"),
     (SELECT zookeeper_id FROM Zookeepers WHERE first_name = "Steve" AND last_name = "Irwin"),
@@ -188,7 +188,7 @@ VALUES (
     "Grass and a few watermelons."
 ), (
     (SELECT species_id FROM Species WHERE species_name = "Lion"),
-    (SELECT zookeeper_id FROM Zookeepers WHERE first_name = "Jack" AND last_name = "Hanna"),
+    NULL,
     '2022-10-05',
     '14:35:30',
     "Pork shoulders and rabbit thighs."
