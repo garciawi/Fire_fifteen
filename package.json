@@ -1,0 +1,25 @@
+{
+  "name": "fire_fifteen",
+  "version": "1.0.0",
+  "description": "A database with a frontend for zookeepers at Fire Zoo to track illness from food for animals at the zoo",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garciawi/Fire_fifteen.git"
+  },
+  "author": "Anh Tuyet Vo and William Garcia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/garciawi/Fire_fifteen/issues"
+  },
+  "homepage": "https://github.com/garciawi/Fire_fifteen#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "forever": "^4.0.3",
+    "mysql": "^2.18.1"
+  }
+}
