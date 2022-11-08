@@ -17,7 +17,7 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
     ROUTES
 */
                 // This is the basic syntax for what is called a 'route'
-app.get('/', function(req, res)
+app.get('/animals', function(req, res)
 {  
     let query1 = "SELECT Animals.animal_id, Species.species_name, Animals.name, Animals.is_sick FROM Animals JOIN Species ON Animals.species_id = Species.species_id;";               // Define our query
 
