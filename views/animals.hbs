@@ -1,0 +1,26 @@
+{{!-- Create a table --}}
+<table>
+
+    {{!-- Header section --}}
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.animal_id}}</td>
+            <td>{{this.species_name}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.is_sick}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
