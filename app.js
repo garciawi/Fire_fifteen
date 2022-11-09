@@ -38,6 +38,21 @@ app.get('/animals', function(req, res)
     })
 });
 
+app.post('/add-animal-ajax', function(req, res) {
+    let data = req.body
+
+    query1 = `INSERT INTO Animals (name, species_id, is_sick)
+    VALUES ('${data.name}', '${data.species_id}', '${data.is_sick}');`;
+    db.pool.query(query1, function(error, rows, fields) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/animals');
+        }
+    });
+});
+
 // Species
 app.get('/species', function(req, res)
 {
