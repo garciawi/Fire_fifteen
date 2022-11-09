@@ -1,0 +1,35 @@
+<h2>
+    Feedings/Kitchens Intersection Table
+</h2>
+
+{{!-- Create a table --}}
+<table border="1" cellpadding="5">
+
+    {{!-- Header section --}}
+    <thead>
+        <tr>
+            <th>Feedings_Kitchens Id</th>
+            <th>Feeding Id</th>
+            <th>Kitchen Id</th>
+            <th>Kitchen Name</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.feeding_kitchen_id}}</td>
+            <td>{{this.feeding_id}}</td>
+            <td>{{this.kitchen_id}}</td>
+            <td>{{this.name}}</td>
+            <td align="middle">
+                <button class="delete" onClick="deleteFeeding_Kitchen({{this.feeding_kitchen_id}})">Delete</button>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<p>&nbsp;</p>

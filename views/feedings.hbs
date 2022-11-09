@@ -1,0 +1,41 @@
+<h2>
+    Feedings
+</h2>
+
+{{!-- Create a table --}}
+<table border="1" cellpadding="5">
+
+    {{!-- Header section --}}
+    <thead>
+        <tr>
+            <th>Feeding ID</th>
+            <th>Species Id</th>
+            <th>Species Name</th>
+            <th>Zookeeper Id</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Description</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.feeding_id}}</td>
+            <td>{{this.species_id}}</td>
+            <td>{{this.species_name}}</td>
+            <td>{{this.zookeeper_id}}</td>
+            <td>{{this.feeding_date}}</td>
+            <td>{{this.feeding_time}}</td>
+            <td>{{this.feeding_description}}</td>
+            <td align="middle">
+                <button class="delete" onClick="deleteFeeding({{this.feeding_id}})">Delete</button>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<p>&nbsp;</p>
