@@ -18,6 +18,9 @@ var exphbs = require('express-handlebars');     // Import express-handlebars
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file
 
+// Static Files
+app.use(express.static('public'));
+
 /*
     ROUTES
 */
@@ -36,6 +39,21 @@ app.get('/animals', function(req, res)
 
         res.render('animals', {data: rows});
     })
+});
+
+app.post('/add-animal-ajax', function(req, res) {
+    let data = req.body
+
+    query1 = `INSERT INTO Animals (name, species_id, is_sick)
+    VALUES ('${data.name}', '${data.species_id}', '${data.is_sick}');`;
+    db.pool.query(query1, function(error, rows, fields) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            res.redirect('/animals');
+        }
+    });
 });
 
 // Species
@@ -111,6 +129,7 @@ app.get('/zookeepers', function(req, res)
         res.render('zookeepers', {data: rows});
     })
 });
+
 
 /*
     LISTENER
