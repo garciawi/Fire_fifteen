@@ -18,6 +18,9 @@ var exphbs = require('express-handlebars');     // Import express-handlebars
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file
 
+// Static Files
+app.use(express.static('public'));
+
 /*
     ROUTES
 */
@@ -126,6 +129,7 @@ app.get('/zookeepers', function(req, res)
         res.render('zookeepers', {data: rows});
     })
 });
+
 
 /*
     LISTENER
