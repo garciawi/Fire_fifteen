@@ -1,14 +1,19 @@
+<h2>
+    Animals
+</h2>
+
 {{!-- Create a table --}}
-<table>
+<table border="1" cellpadding="5">
 
     {{!-- Header section --}}
     <thead>
         <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
+            <th>Animal ID</th>
+            <th>Species</th>
+            <th>Name</th>
+            <th>Sick</th>
+            <th>Delete</th>
+            <th>Edit</th>
         </tr>
     </thead>
 
@@ -20,7 +25,15 @@
             <td>{{this.species_name}}</td>
             <td>{{this.name}}</td>
             <td>{{this.is_sick}}</td>
+            <td align="middle">
+                <button class="delete" onClick="deleteAnimal({{this.animal_id}})">Delete</button>
+            </td>
+            <td align="middle">
+                <button class="edit" onClick="editAnimal({{this.animal_id}})">Edit</button>
+            </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+<p>&nbsp;</p>
