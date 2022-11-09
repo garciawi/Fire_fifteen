@@ -3,7 +3,7 @@
 </h2>
 
 {{!-- Create a table --}}
-<table border="1" cellpadding="5">
+<table id="animals-table" border="1" cellpadding="5">
 
     {{!-- Header section --}}
     <thead>
@@ -37,3 +37,28 @@
 </table>
 
 <p>&nbsp;</p>
+
+<form id="addAnimal">
+    <fieldset class="fields">
+        <legend><strong>Add Animal</strong></legend>
+
+        <label for="input-species">Species: </label>
+        <input type="text" name="input-species" id="input-species"></input>
+            
+        <p>
+        <label for="input-name">Name: </label>
+        <input type="text" name="input-name" id="input-name"></input>
+        </p>
+
+        <p>
+        <label for="input-is-sick">Sick:  </label>
+        <input type="text" name="input-is-sick" id="input-is-sick"></input>
+        </p>
+
+        <p>
+        <input class="btn" type="submit" id="addAnimal" value="Submit">
+        </p>
+    </fieldset>
+</form>
+
+<script src="./js/add_animal.js"></script>
