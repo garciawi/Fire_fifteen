@@ -34,11 +34,19 @@ app.get('/', function (req, res) {
 app.get('/animals', function(req, res)
 {
     let query1 = "SELECT Animals.animal_id, Species.species_name, Animals.name, Animals.is_sick FROM Animals JOIN Species ON Animals.species_id = Species.species_id;";
+    let query2 = "SELECT * FROM Species"
 
     db.pool.query(query1, function(error, rows, fields){
+        let animals = rows
+        
+        db.pool.query(query2, (error,rows, fields)=> {
+            
+            let species = rows;
 
-        res.render('animals', {data: rows});
-    })
+            return res.render('animals', {data:animals, species:species});
+            })
+            
+        })
 });
 
 app.post('/add-animal-ajax', function(req, res) {

@@ -43,7 +43,12 @@
         <legend><strong>Add Animal</strong></legend>
 
         <label for="input-species">Species: </label>
-        <input type="text" name="input-species" id="input-species"></input>
+        <select name="input-species" id="input-species">
+        <option value="">Select a Species</option>
+        {{#each species}}
+        <option value="{{this.species_id}}">{{this.species_name}}</option>
+        {{/each}}
+        </select>
             
         <p>
         <label for="input-name">Name: </label>
@@ -52,7 +57,10 @@
 
         <p>
         <label for="input-is-sick">Sick:  </label>
-        <input type="text" name="input-is-sick" id="input-is-sick"></input>
+        <select name="input-is-sick" id="input-is_sick">
+            <option value="">0</option>
+            <option value="">1</option>
+        </select>
         </p>
 
         <p>
