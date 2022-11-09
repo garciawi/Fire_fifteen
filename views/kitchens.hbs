@@ -1,5 +1,5 @@
 <h2>
-    Species
+    Kitchens
 </h2>
 
 {{!-- Create a table --}}
@@ -8,9 +8,8 @@
     {{!-- Header section --}}
     <thead>
         <tr>
-            <th>Species ID</th>
-            <th>Species Name</th>
-            <th>Diet</th>
+            <th>Kitchen Id</th>
+            <th>Kitchen Name</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -19,11 +18,10 @@
     <tbody>
         {{#each data}}
         <tr>
-            <td>{{this.species_id}}</td>
-            <td>{{this.species_name}}</td>
-            <td>{{this.diet_type}}</td>
+            <td>{{this.kitchen_id}}</td>
+            <td>{{this.name}}</td>
             <td align="middle">
-                <button class="delete" onClick="deleteSpecies({{this.species_id}})">Delete</button>
+                <button class="delete" onClick="deleteKitchen({{this.kitchen_id}})">Delete</button>
             </td>
         </tr>
         {{/each}}
