@@ -16,15 +16,18 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 /*
     ROUTES
 */
-                // This is the basic syntax for what is called a 'route'
+app.get('/', function (req, res) {
+    res.render('index');
+});
+
 app.get('/animals', function(req, res)
-{  
-    let query1 = "SELECT Animals.animal_id, Species.species_name, Animals.name, Animals.is_sick FROM Animals JOIN Species ON Animals.species_id = Species.species_id;";               // Define our query
+{
+    let query1 = "SELECT Animals.animal_id, Species.species_name, Animals.name, Animals.is_sick FROM Animals JOIN Species ON Animals.species_id = Species.species_id;";
 
     db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-        res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
-    })                                                      // an object where 'data' is equal to the 'rows' we
+        res.render('animals', {data: rows});
+    })
 });
 
 
