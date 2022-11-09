@@ -1,0 +1,33 @@
+<h2>
+    Species
+</h2>
+
+{{!-- Create a table --}}
+<table border="1" cellpadding="5">
+
+    {{!-- Header section --}}
+    <thead>
+        <tr>
+            <th>Species ID</th>
+            <th>Species Namne</th>
+            <th>Diet</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.species_id}}</td>
+            <td>{{this.species_name}}</td>
+            <td>{{this.diet_type}}</td>
+            <td align="middle">
+                <button class="delete" onClick="deleteAnimal({{this.animal_id}})">Delete</button>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<p>&nbsp;</p>
