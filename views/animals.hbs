@@ -39,6 +39,7 @@
 <script src="./js/delete_animal.js"></script>
 <p>&nbsp;</p>
 
+{{!-- Add an animal form --}}
 <form id="add-animal-form-ajax">
     <fieldset class="fields">
         <legend><strong>Add Animal</strong></legend>
@@ -69,16 +70,24 @@
         </p>
     </fieldset>
 </form>
-
 <script src="./js/add_animal.js"></script>
+<p>&nbsp;</p>
 
-<h2>Search Using an Animal Name</h2>
-<p>Search animal names using the field below. Partial names are OK too!</p>
-<form id="searchAnimal" method='GET' action='/'>
-    <label for="input-name">Search by Animal Name: </label>
-    <input type="text" name="searchAnimal" id="searchAnimal">
-    
-    <input type="submit">
-    <a href='/'><button>Reset</button></a>
+{{!-- Search an animal form --}}
+<form id="add-animal-form-html" method='GET' action="/animals">
+    <fieldset class="fields">
+        <legend><strong>Search Animal</strong></legend>
+        Search animal names using the field below. Partial names are OK too!
+
+        <p>
+            <label for="input-name">Search by Name: </label>
+            <input type="text" name="name" id="input-name-html-search">
+        </p>
+
+        <p>
+            <input class="btn" type="submit" value="Submit">
+            <a href='/animals'><button>Reset</button></a>
+        </p>
+    </fieldset>
 </form>
 
