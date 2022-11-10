@@ -34,26 +34,27 @@ app.get('/', function (req, res) {
 app.get('/animals', function(req, res)
 {
     let query1;
-    if (req.query.searchAnimal === undefined){
+
+    // If there is no query string, we just perform a basic SELECT
+    if (req.query.name === undefined){
         query1 = "SELECT Animals.animal_id, Species.species_name, Animals.name, Animals.is_sick FROM Animals JOIN Species ON Animals.species_id = Species.species_id;";
     }
+    // If there is a query string, we assume this is a search, and return desired results
     else
     {
-        query1 = "SELECT Animals.animal_id, Species.species_name, Animals.name, Animals.is_sick FROM Animals JOIN Species ON Animals.species_id = Species.species_id WHERE lower(Animals.name) LIKE '%${req.query.searchAnimal}%';"
+        query1 = `SELECT * FROM Animals WHERE lower(Animals.name) LIKE "${req.query.name}%"`
     }
-    let query2 = "SELECT * FROM Species;";
     
-    db.pool.query(query1, function(error, rows, fields){
-        let animals = rows
-        
-        db.pool.query(query2, (error,rows, fields)=> {
-            
-            let species = rows;
+    let query2 = "SELECT * FROM Species;";
 
-            return res.render('animals', {data:animals, species:species});
-            })
-            
+    db.pool.query(query1, function(error, rows, fields){
+        let animals = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+            let species = rows;
+            return res.render('animals', {data: animals, species: species});
         })
+    })
 });
 
 // Species
