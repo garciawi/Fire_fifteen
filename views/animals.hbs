@@ -20,7 +20,7 @@
     {{!-- Body section --}}
     <tbody>
         {{#each data}}
-        <tr>
+        <tr data-value={{this.animal_id}} >
             <td>{{this.animal_id}}</td>
             <td>{{this.species_name}}</td>
             <td>{{this.name}}</td>
