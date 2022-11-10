@@ -69,4 +69,14 @@
     </fieldset>
 </form>
 
+<h2>Search Using an HTML Form</h2>
+<p>Search animal names using the field below. Partial names are OK too!</p>
+<form id="searchAnimal" method='GET' action='/'>
+    <label for="input-name">Search by Animal Name: </label>
+    <input type="text" name="searchAnimal" id="searchAnimal">
+    
+    <input type="submit">
+    <a href='/'><button>Reset</button></a>
+</form>
+
 <script src="./js/add_animal.js"></script>

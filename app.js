@@ -10,7 +10,7 @@ var express = require('express');   // We are using the express library for the 
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-PORT        = 9865;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 9860;                 // Set a port number at the top so it's easy to change in the future
 var db = require('./database/db-connector')
 
 const { engine } = require('express-handlebars');
@@ -33,9 +33,16 @@ app.get('/', function (req, res) {
 // Animals
 app.get('/animals', function(req, res)
 {
-    let query1 = "SELECT Animals.animal_id, Species.species_name, Animals.name, Animals.is_sick FROM Animals JOIN Species ON Animals.species_id = Species.species_id;";
-    let query2 = "SELECT * FROM Species"
-
+    let query1;
+    if (req.query.searchAnimal === undefined){
+        query1 = "SELECT Animals.animal_id, Species.species_name, Animals.name, Animals.is_sick FROM Animals JOIN Species ON Animals.species_id = Species.species_id;";
+    }
+    else
+    {
+        query1 = "SELECT Animals.animal_id, Species.species_name, Animals.name, Animals.is_sick FROM Animals JOIN Species ON Animals.species_id = Species.species_id WHERE lower(Animals.name) LIKE '%${req.query.searchAnimal}%';"
+    }
+    let query2 = "SELECT * FROM Species;";
+    
     db.pool.query(query1, function(error, rows, fields){
         let animals = rows
         
