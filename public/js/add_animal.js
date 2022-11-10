@@ -69,6 +69,7 @@ addRowToTable = (data) => {
     let speciesCell = document.createElement("TD");
     let nameCell = document.createElement("TD");
     let issickCell = document.createElement("TD");
+    let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
     animalidCell.innerText = newRow.id;
@@ -76,12 +77,20 @@ addRowToTable = (data) => {
     nameCell.innerText = newRow.name;
     issickCell.innerText = newRow.issick;
 
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deleteAnimal(newRow.id);
+    };
+
     // Add the cells to the row 
     row.appendChild(animalidCell);
     row.appendChild(speciesCell);
     row.appendChild(nameCell);
     row.appendChild(issickCell);
+    row.appendChild(deleteCell);
 
+    row.setAttribute('data-value', newRow.id)
     // Add the row to the table
     currentTable.appendChild(row);
 };

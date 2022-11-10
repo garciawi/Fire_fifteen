@@ -71,6 +71,29 @@ app.post('/add-animal-ajax', function(req, res) {
     });
 });
 
+// Delete Animals
+app.delete('/delete-animal-ajax/', function(req,res,next){
+    let data = req.body;
+    let animal_id = parseInt(data.id);
+    let deleteAnimals = `DELETE FROM Animals WHERE Animals.animal_id = '${animal_id}';`;
+
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteAnimals, [animal_id], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                res.sendStatus(204);
+              }
+  })});
+
 // Species
 app.get('/species', function(req, res)
 {
