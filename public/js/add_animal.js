@@ -8,20 +8,20 @@ addAnimalForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputSpecies = document.getElementById("input-species");
     let inputName = document.getElementById("input-name");
+    let inputSpecies = document.getElementById("input-species");
     let inputIsSick = document.getElementById("input-is-sick");
 
     // Get the values from the form fields
-    let speciesValue = inputSpecies.value;
     let nameValue = inputName.value;
+    let speciesValue = inputSpecies.value;
     let issickValue = inputIsSick.value;
 
     // Put our data we want to send in a javascript object
     let data = {
-        species: speciesValue,
         name: nameValue,
-        issick: issickValue
+        species_id: speciesValue,
+        is_sick: issickValue
     }
 
     // Setup our AJAX request
@@ -37,8 +37,8 @@ addAnimalForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            inputSpecies.value = '';
             inputName.value = '';
+            inputSpecies.value = '';
             inputIsSick.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -48,6 +48,7 @@ addAnimalForm.addEventListener("submit", function (e) {
 
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
+
 });
 
 // Creates a single row from an Object
@@ -65,32 +66,41 @@ addRowToTable = (data) => {
 
     // Create a row and cells
     let row = document.createElement("TR");
-    let animalidCell = document.createElement("TD");
-    let speciesCell = document.createElement("TD");
+    let animalIdCell = document.createElement("TD");
     let nameCell = document.createElement("TD");
+    let speciesCell = document.createElement("TD");
     let issickCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
+    let editCell = document.createElement("TD");
 
     // Fill the cells with correct data
-    animalidCell.innerText = newRow.id;
-    speciesCell.innerText = newRow.species;
+    animalIdCell.innerText = newRow.animal_id;
     nameCell.innerText = newRow.name;
-    issickCell.innerText = newRow.issick;
+    speciesCell.innerText = newRow.species_id;
+    issickCell.innerText = newRow.is_sick;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deleteAnimal(newRow.id);
+        deleteAnimal(newRow.animal_id);
+    };
+
+    editCell = document.createElement("button");
+    editCell.innerHTML = "Edit";
+    editCell.onclick = function(){
+        editAnimal(newRow.animal_id);
     };
 
     // Add the cells to the row 
-    row.appendChild(animalidCell);
-    row.appendChild(speciesCell);
+    row.appendChild(animalIdCell);
     row.appendChild(nameCell);
+    row.appendChild(speciesCell);
     row.appendChild(issickCell);
     row.appendChild(deleteCell);
+    row.appendChild(editCell);
 
-    row.setAttribute('data-value', newRow.id)
+    row.setAttribute('data-value', newRow.animal_id)
+
     // Add the row to the table
     currentTable.appendChild(row);
 };

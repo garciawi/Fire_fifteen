@@ -1,6 +1,7 @@
 <h2>
     Animals
 </h2>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 {{!-- Create a table --}}
 <table id="animals-table" border="1" cellpadding="5">
@@ -9,8 +10,8 @@
     <thead>
         <tr>
             <th>Animal ID</th>
-            <th>Species</th>
             <th>Name</th>
+            <th>Species</th>
             <th>Sick</th>
             <th>Delete</th>
             <th>Edit</th>
@@ -22,8 +23,8 @@
         {{#each data}}
         <tr data-value={{this.animal_id}} >
             <td>{{this.animal_id}}</td>
-            <td>{{this.species_name}}</td>
             <td>{{this.name}}</td>
+            <td>{{this.species_name}}</td>
             <td>{{this.is_sick}}</td>
             <td align="middle">
                 <button class="delete" onClick="deleteAnimal({{this.animal_id}})">Delete</button>
@@ -38,26 +39,26 @@
 <script src="./js/delete_animal.js"></script>
 <p>&nbsp;</p>
 
-<form id="addAnimal">
+<form id="add-animal-form-ajax">
     <fieldset class="fields">
         <legend><strong>Add Animal</strong></legend>
 
-        <label for="input-species">Species: </label>
-        <select name="input-species" id="input-species">
-        <option value="">Select a Species</option>
-        {{#each species}}
-        <option value="{{this.species_id}}">{{this.species_name}}</option>
-        {{/each}}
-        </select>
-            
-        <p>
         <label for="input-name">Name: </label>
         <input type="text" name="input-name" id="input-name"></input>
+            
+        <p>
+        <label for="input-species">Species: </label>
+        <select name="input-species" id="input-species">
+            <option value="">Select a Species</option>
+            {{#each species}}
+            <option value="{{this.species_id}}">{{this.species_name}}</option>
+            {{/each}}
+        </select>
         </p>
 
         <p>
         <label for="input-is-sick">Sick:  </label>
-        <select name="input-is-sick" id="input-is_sick">
+        <select name="input-is-sick" id="input-is-sick">
             <option value="0">No</option>
             <option value="1">Yes</option>
         </select>
@@ -68,6 +69,7 @@
         </p>
     </fieldset>
 </form>
+
 <script src="./js/add_animal.js"></script>
 
 <h2>Search Using an Animal Name</h2>
