@@ -94,11 +94,11 @@
 <p>To update a specific animal's sick status select their name from the drop-down menu on the left and their desired sicks status from the drop down menu on the right</p>
 <form id="updateAnimalSickness">
 
-    <label for="input-animal-sick-status">Animal: </label>
-    <select name="input-animal-name" id="mySelect">
+    <label for="input-animals">Animal: </label>
+    <select name="input-animals" id="mySelect">
         <option value="test">Select an Animal</option>
-        {{#each Animals}}
-        <option value="{{this.animal_id}}">{{this.animal_name}}</option>
+        {{#each data}}
+        <option value="{{this.animal_id}}">{{this.name}}</option>
         {{/each}}
     </select>
 
