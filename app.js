@@ -170,6 +170,43 @@ app.delete('/delete-animal-ajax/', function(req,res,next){
               }
   })});
 
+  //update animal sickness
+  app.put('/put-animal-ajax', function(req,res,next){
+    let data = req.body;
+    
+    let animal_id = parseInt(data.animal_id);
+    let sickStatus = parseInt(data.is_sick);
+    
+    let queryUpdateSick = `UPDATE Animals SET Animals.is_sick = '${sickStatus}' WHERE Animals.animal_id = '${animal_id}';`;
+    let selectAnimal = `SELECT * FROM Animals WHERE Animals.animal_id = '${animal_id}';`
+    
+            // Run the 1st query
+            db.pool.query(queryUpdateSick, [animal_id, sickStatus], function(error, rows, fields){
+                if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+                }
+    
+                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // table on the front-end
+                else
+                {
+                    // Run the second query
+                    db.pool.query(selectAnimal, [animal_id], function(error, rows, fields) {
+    
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.send(rows);
+                        }
+                    })
+                }
+    })});
+    
+
 
 /*
     LISTENER
