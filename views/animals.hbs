@@ -90,10 +90,15 @@
         </p>
     </fieldset>
 </form>
-<h2>Updating an Animals Sick Status Form</h2>
-<p>To update a specific animal's sick status select their name from the drop-down menu on the left and their desired sicks status from the drop down menu on the right</p>
-<form id="updateAnimalSickness">
+<p>&nbsp;</p>
 
+
+<form id="updateAnimalSickness">
+    <fieldset class="fields">
+        <legend><strong>Update an Animals Sick Status Form</strong></legend>
+        To update a specific animal's sick status select their name from the drop-down menu on the left 
+        and their desired sicks status from the drop down menu on the right.
+    <p>
     <label for="input-animals">Animal: </label>
     <select name="input-animals" id="mySelect">
         <option value="test">Select an Animal</option>
@@ -101,16 +106,24 @@
         <option value="{{this.animal_id}}">{{this.name}}</option>
         {{/each}}
     </select>
+    </P>
 
+    <p>
     <label for="input-animalSick">Sick: </label>
     <select name="input-animalSick" id="input-sick-update">
         <option>Select Sick Status</option>
         <option value="0">No</option>
         <option value="1">Yes</option>
     </select>
-    <input type="submit">
+    </p>
 
+    <p>
+        <input type="submit">
+    </p>
+
+    </fieldset>
 </form>
 
 <script src="./js/update_animal.js"></script>
 
+<p>&nbsp;</p>
