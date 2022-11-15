@@ -10,7 +10,7 @@ var express = require('express');   // We are using the express library for the 
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-PORT        = 9866;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 9865;                 // Set a port number at the top so it's easy to change in the future
 var db = require('./database/db-connector')
 
 const { engine } = require('express-handlebars');
