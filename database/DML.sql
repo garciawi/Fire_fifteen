@@ -66,8 +66,8 @@ VALUES (:feeding_id_from_dropdown, :kitchen_id_from_dropdown)
 DELETE FROM Feedings_Kitchens WHERE feeding_id = :feeding_id_selected_from_dropdown AND kitchen_id = :kitchen_id_from_dropdown;
 
 -- insert a new animal to the animal table
-INSERT INTO Animals(animal_id, name, species_id, is_sick)
-VALUES (:animal_id_input, :name_input, :species_id_input, :is_sick_input);
+INSERT INTO Animals(name, species_id, is_sick)
+VALUES (:name_input, :species_id_input, :is_sick_input);
 
 -- display table with animal id, species, name, is_sick status
 SELECT Animals.animal_id, Species.species_name, Animals.name, Animals.is_sick 
