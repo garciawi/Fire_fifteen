@@ -26,7 +26,7 @@ DELETE FROM Kitchens WHERE kitchen_id = :kitchen_id_selected_from_kitchens_list;
 
 -- Show all feedings in the table (with corresponding species name)
 SELECT Feedings.feeding_id AS Id, Feedings.species_id AS "Species Id", Species.species_name AS "Species Name", 
-Feedings.zookeeper_id AS "Zookeeper Id", Feedings.feeding_date AS Date, Feedings.feeding_time AS Time, 
+Feedings.zookeeper_id AS "Zookeeper Id", DATE_FORMAT(Feedings.feeding_date, "%Y-%m-%d") AS Date, Feedings.feeding_time AS Time, 
 Feedings.feeding_description AS Description
 FROM Feedings
 INNER JOIN Species ON Feedings.species_id = Species.species_id;
