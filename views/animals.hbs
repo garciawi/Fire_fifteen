@@ -24,7 +24,7 @@
         <tr data-value={{this.animal_id}} >
             <td>{{this.animal_id}}</td>
             <td>{{this.name}}</td>
-            <td>{{this.species_name}}</td>
+            <td>{{this.species_id}}</td>
             <td>{{this.is_sick}}</td>
             <td align="middle">
                 <button class="delete" onClick="deleteAnimal({{this.animal_id}})">Delete</button>
@@ -37,6 +37,25 @@
     </tbody>
 </table>
 <script src="./js/delete_animal.js"></script>
+<p>&nbsp;</p>
+
+{{!-- Search an animal form --}}
+<form id="search-animal-form-html" method='GET' action="/animals">
+    <fieldset class="fields">
+        <legend><strong>Search Animal</strong></legend>
+        Search animal names using the field below. Partial names are OK too!
+
+        <p>
+            <label for="input-name">Search by Name: </label>
+            <input type="text" name="name" id="input-name-html-search">
+        </p>
+
+        <p>
+            <input class="btn" type="submit" value="Submit">
+            <button href='/animals'>Reset</button>
+        </p>
+    </fieldset>
+</form>
 <p>&nbsp;</p>
 
 {{!-- Add an animal form --}}
@@ -73,31 +92,11 @@
 <script src="./js/add_animal.js"></script>
 <p>&nbsp;</p>
 
-{{!-- Search an animal form --}}
-<form id="add-animal-form-html" method='GET' action="/animals">
-    <fieldset class="fields">
-        <legend><strong>Search Animal</strong></legend>
-        Search animal names using the field below. Partial names are OK too!
-
-        <p>
-            <label for="input-name">Search by Name: </label>
-            <input type="text" name="name" id="input-name-html-search">
-        </p>
-
-        <p>
-            <input class="btn" type="submit" value="Submit">
-            <a href='/animals'><button>Reset</button></a>
-        </p>
-    </fieldset>
-</form>
-<p>&nbsp;</p>
-
-
 <form id="updateAnimalSickness">
     <fieldset class="fields">
         <legend><strong>Update an Animals Sick Status Form</strong></legend>
-        To update a specific animal's sick status select their name from the drop-down menu on the left 
-        and their desired sicks status from the drop down menu on the right.
+        To update a specific animal's sick status select their name from the drop-down menu
+        and desired sick status.
     <p>
     <label for="input-animals">Animal: </label>
     <select name="input-animals" id="mySelect">
