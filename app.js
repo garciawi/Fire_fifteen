@@ -148,17 +148,29 @@ app.get('/zookeepers', function(req, res)
 });
 
 // Add Animals
-app.post('/add-animal-ajax/', function(req, res) {
+app.post('/add-animal-ajax', function(req, res) {
     let data = req.body;
 
     query1 = `INSERT INTO Animals(name, species_id, is_sick)
     VALUES ('${data.name}', '${data.species_id}', '${data.is_sick}')`;
+
     db.pool.query(query1, function(error, rows, fields) {
         if (error) {
             console.log(error)
             res.sendStatus(400);
         } else {
-            res.redirect('/animals');
+            query2 = `SELECT Animals.animal_id, Animals.name, Species.species_name, Animals.is_sick FROM Animals 
+            JOIN Species ON Animals.species_id = Species.species_id
+            GROUP BY Animals.animal_id ASC;`;
+            
+            db.pool.query(query2, function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
         }
     })
 });

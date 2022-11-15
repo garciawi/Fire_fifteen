@@ -49,7 +49,7 @@ addAnimalForm.addEventListener("submit", function (e) {
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
 
-});
+})
 
 // Creates a single row from an Object
 addRowToTable = (data) => {
@@ -76,7 +76,7 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
     animalIdCell.innerText = newRow.animal_id;
     nameCell.innerText = newRow.name;
-    speciesCell.innerText = newRow.species_id;
+    speciesCell.innerText = newRow.species_name;
     issickCell.innerText = newRow.is_sick;
 
     deleteCell = document.createElement("button");
@@ -103,14 +103,14 @@ addRowToTable = (data) => {
 
     // Add the row to the table
     currentTable.appendChild(row);
-    // Start of new Step 8 code for adding new data to the dropdown menu for updating people
+
     
-    // Find drop down menu, create a new option, fill data in the option (full name, id),
+    // Find drop down menu, create a new option, fill data in the option,
     // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
     let selectMenu = document.getElementById("mySelect");
     let option = document.createElement("option");
     option.text = newRow.name;
     option.value = newRow.is_sick;
     selectMenu.add(option);
-    // End of new step 8 code.
-};
+
+}
