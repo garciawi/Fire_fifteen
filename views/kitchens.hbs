@@ -1,9 +1,10 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <h2>
     Kitchens
 </h2>
 
 {{!-- Create a table --}}
-<table border="1" cellpadding="5">
+<table id="kitchens-table" border="1" cellpadding="5">
 
     {{!-- Header section --}}
     <thead>
@@ -27,5 +28,24 @@
         {{/each}}
     </tbody>
 </table>
+<script src="./js/delete_kitchen.js"></script>
+<p>&nbsp;</p>
 
+{{!-- Add a Kitchen form --}}
+<form id="add-kitchen-form-ajax">
+    <fieldset class="fields">
+        <legend><strong>Add Kitchen</strong></legend>
+        *Note: Kitchen cannot be deleted if it is associated with a feeding.
+
+        <p>
+            <label for="input-name">Name: </label>
+            <input type="text" name="input-name" id="input-name"></input>
+        </p>
+
+        <p>
+        <input class="btn" type="submit" value="Submit">
+        </p>
+    </fieldset>
+</form>
+<script src="./js/add_kitchen.js"></script>
 <p>&nbsp;</p>

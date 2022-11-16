@@ -1,9 +1,10 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <h2>
     Zookeepers
 </h2>
 
 {{!-- Create a table --}}
-<table border="1" cellpadding="5">
+<table id="zookeepers-table" border="1" cellpadding="5">
 
     {{!-- Header section --}}
     <thead>
@@ -29,5 +30,26 @@
         {{/each}}
     </tbody>
 </table>
+<script src="./js/delete_zookeeper.js"></script>
+<p>&nbsp;</p>
 
+{{!-- Add a Zookeeper form --}}
+<form id="add-zookeeper-form-ajax">
+    <fieldset class="fields">
+        <legend><strong>Add Zookeeper</strong></legend>
+
+        <label for="input-first-name">First Name: </label>
+        <input type="text" name="input-first-name" id="input-first-name"></input>
+
+        <p>
+        <label for="input-last-name">Last Name: </label>
+        <input type="text" name="input-last-name" id="input-last-name"></input>
+        </p>
+
+        <p>
+        <input class="btn" type="submit" value="Submit">
+        </p>
+    </fieldset>
+</form>
+<script src="./js/add_zookeeper.js"></script>
 <p>&nbsp;</p>
