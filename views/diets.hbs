@@ -3,7 +3,7 @@
 </h2>
 
 {{!-- Create a table --}}
-<table border="1" cellpadding="5">
+<table id="diets-table" border="1" cellpadding="5">
 
     {{!-- Header section --}}
     <thead>
@@ -27,5 +27,21 @@
         {{/each}}
     </tbody>
 </table>
+<p>&nbsp;</p>
 
+
+{{!-- Add a Diet form --}}
+<form id="add-diets-form-ajax">
+    <fieldset class="fields">
+        <legend><strong>Add a Diet</strong></legend>
+
+        <label for="input-diets-name">Diets: </label>
+        <input type="text" name="input-diets" id="input-diets"></input>
+            
+        <p>
+        <input class="btn" type="submit" value="Submit">
+        </p>
+    </fieldset>
+</form>
+<script src="./js/add_diets.js"></script>
 <p>&nbsp;</p>
