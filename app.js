@@ -173,16 +173,111 @@ app.get('/kitchens', function(req, res)
     })
 });
 
+// Add Kitchen
+app.post('/add-kitchen-ajax', function(req, res) {
+    let data = req.body;
+
+    query1 = `INSERT INTO Kitchens (name)
+    VALUES ('${data.name}')`;
+
+    db.pool.query(query1, function(error, rows, fields) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            query2 = `SELECT * FROM Kitchens;`;
+            
+            db.pool.query(query2, function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+// Delete Kitchen
+app.delete('/delete-kitchen-ajax', function(req,res,next){
+    let data = req.body;
+
+    let kitchen_id = parseInt(data.id);
+    let deleteKitchen = `DELETE FROM Kitchens WHERE kitchen_id = '${kitchen_id}';`;
+
+          // Run the 1st query
+          db.pool.query(deleteKitchen, [kitchen_id], function(error, rows, fields){
+              if (error) {
+  
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                res.sendStatus(204);
+              }
+  })});
+
 //Zookeepers
 app.get('/zookeepers', function(req, res)
 {
-    let query1 = "SELECT * FROM Zookeepers;";
+    let query1 = "SELECT * FROM Zookeepers GROUP BY Zookeepers.zookeeper_id ASC;";
 
     db.pool.query(query1, function(error, rows, fields){
 
         res.render('zookeepers', {data: rows});
     })
 });
+
+// Add Zookeeper
+app.post('/add-zookeeper-ajax', function(req, res) {
+    let data = req.body;
+
+    query1 = `INSERT INTO Zookeepers (first_name, last_name)
+    VALUES ('${data.first_name}', '${data.last_name}')`;
+
+    db.pool.query(query1, function(error, rows, fields) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            query2 = `SELECT * FROM Zookeepers
+            GROUP BY Zookeepers.zookeeper_id ASC;`;
+            
+            db.pool.query(query2, function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+// Delete Zookeeper
+app.delete('/delete-zookeeper-ajax', function(req,res,next){
+    let data = req.body;
+
+    let zookeeper_id = parseInt(data.id);
+    let deleteZookeepers = `DELETE FROM Zookeepers WHERE Zookeepers.zookeeper_id = '${zookeeper_id}';`;
+
+          // Run the 1st query
+          db.pool.query(deleteZookeepers, [zookeeper_id], function(error, rows, fields){
+              if (error) {
+  
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                res.sendStatus(204);
+              }
+  })});
 
 // Add Animals
 app.post('/add-animal-ajax', function(req, res) {

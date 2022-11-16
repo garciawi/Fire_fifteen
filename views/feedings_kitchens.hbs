@@ -12,7 +12,6 @@
             <th>Feeding Id</th>
             <th>Kitchen Id</th>
             <th>Kitchen Name</th>
-            <th>Delete</th>
         </tr>
     </thead>
 
@@ -24,9 +23,6 @@
             <td>{{this.feeding_id}}</td>
             <td>{{this.kitchen_id}}</td>
             <td>{{this.name}}</td>
-            <td align="middle">
-                <button class="delete" onClick="deleteFeeding_Kitchen({{this.feeding_kitchen_id}})">Delete</button>
-            </td>
         </tr>
         {{/each}}
     </tbody>
