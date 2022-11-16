@@ -3,7 +3,7 @@
 </h2>
 
 {{!-- Create a table --}}
-<table border="1" cellpadding="5">
+<table  id="species-table" border="1" cellpadding="5">
 
     {{!-- Header section --}}
     <thead>
@@ -30,4 +30,30 @@
     </tbody>
 </table>
 
+<p>&nbsp;</p>
+{{!-- Add a species form --}}
+<form id="add-species-form-ajax">
+    <fieldset class="fields">
+        <legend><strong>Add Species</strong></legend>
+
+        <label for="input-species-name">Species Name: </label>
+        <input type="text" name="input-species" id="input-species"></input>
+            
+        <p>
+        <label for="input-diet">Diet Type: </label>
+        <select name="input-diet" id="input-diet">
+            <option value="">Select a Diet</option>
+            {{#each diets}}
+            <option value="{{this.diet_id}}">{{this.diet_type}}</option>
+            {{/each}}
+        </select>
+        </p>
+
+
+        <p>
+        <input class="btn" type="submit" value="Submit">
+        </p>
+    </fieldset>
+</form>
+<script src="./js/add_species.js"></script>
 <p>&nbsp;</p>

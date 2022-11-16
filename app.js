@@ -78,10 +78,47 @@ app.get('/animals', function(req, res)
 app.get('/species', function(req, res)
 {
     let query1 = "SELECT Species.species_id, Species.species_name, Diets.diet_type FROM Species JOIN Diets ON Species.diet_id = Diets.diet_id;";
+    let query2 = `SELECT * FROM Diets;`;
 
+    // Run the 1st query
     db.pool.query(query1, function(error, rows, fields){
+        
+        // Save the people
+        let species = rows;
+        
+        // Run the second query
+        db.pool.query(query2, (error, rows, fields) => {
+            
+            // Save the planets
+            let diets = rows;
+            return res.render('species', {data: species, diets: diets});
+        })
+    })
+});
 
-        res.render('species', {data: rows});
+// Add Species
+app.post('/add-species-ajax', function(req, res) {
+    let data = req.body;
+    query1 = `INSERT INTO Species(species_name, diet_id)
+    VALUES ('${data.species_name}', '${data.diet_id}')`;
+
+    db.pool.query(query1, function(error, rows, fields) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            query2 = `SELECT Species.species_id, Species.species_name, Diets.diet_type 
+            FROM Species JOIN Diets ON Species.diet_id = Diets.diet_id;`;
+            
+            db.pool.query(query2, function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
     })
 });
 
