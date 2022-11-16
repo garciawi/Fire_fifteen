@@ -17,7 +17,7 @@
     {{!-- Body section --}}
     <tbody>
         {{#each data}}
-        <tr>
+        <tr data-value={{this.diet_id}}>
             <td>{{this.diet_id}}</td>
             <td>{{this.diet_type}}</td>
             <td align="middle">
@@ -27,6 +27,7 @@
         {{/each}}
     </tbody>
 </table>
+<script src="./js/delete_diet.js"></script>
 <p>&nbsp;</p>
 
 
