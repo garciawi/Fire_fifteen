@@ -353,6 +353,26 @@ app.post('/add-feeding-ajax', function(req, res) {
     })
 });
 
+// Delete Feeding
+app.delete('/delete-feeding-ajax/', function(req,res,next){
+    let data = req.body;
+    let feeding_id = parseInt(data.id);
+    let deleteFeeding = `DELETE FROM Feedings WHERE Feedings.feeding_id = '${feeding_id}';`;
+          // Run the 1st query
+          db.pool.query(deleteFeeding, [feeding_id], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                res.sendStatus(204);
+              }
+  })});
+
 //Feedings_Kitchens
 app.get('/feedings_kitchens', function(req, res)
 {
