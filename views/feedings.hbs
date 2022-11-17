@@ -107,3 +107,33 @@
 </form>
 <script src="./js/add_feedings.js"></script>
 <p>&nbsp;</p>
+
+{{!-- Update Feeding Form --}}
+<form id="updateFeedingDate">
+    <fieldset class="fields">
+        <legend><strong>Update a Feeding date Form</strong></legend>
+        To update a specific feeding's date, select a new date from drop down menu.
+    <p>
+    <label for="input-feeding">Feeding: </label>
+    <select name="input-feeding" id="mySelect">
+        <option value="test">Select a Feeding</option>
+        {{#each data}}
+        <option value="{{this.feeding_id}}">{{this.feeding_date}}</option>
+        {{/each}}
+    </select>
+    </P>
+
+    <p>
+        <label for="inputUpdateDate">Date: </label>
+        <input type="date" name="input-update-date" id="input-update-date" value="2022-11-16" required></input>
+    </p>
+
+    <p>
+        <input class="btn" type="submit" value="Submit">
+    </p>
+
+    </fieldset>
+</form>
+<script src="./js/update_feeding.js"></script>
+
+<p>&nbsp;</p>

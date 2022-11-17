@@ -10,7 +10,7 @@ var express = require('express');   // We are using the express library for the 
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-PORT        = 9865;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 9800; //9865                 // Set a port number at the top so it's easy to change in the future
 var db = require('./database/db-connector')
 
 const { engine } = require('express-handlebars');
@@ -284,10 +284,8 @@ app.delete('/delete-diets-ajax/', function(req,res,next){
 app.get('/feedings', function(req, res)
 {
     let query1;
-    console.log("the /feedings route called with req.query:", req.query)
     // If there is no query string, we just perform a basic SELECT
     if (req.query.feeding_date === undefined){
-        console.log('req.query.name was undefined')
         query1 = `SELECT Feedings.feeding_id, Feedings.species_id, Species.species_name, Feedings.zookeeper_id, 
         DATE_FORMAT(Feedings.feeding_date, "%Y-%m-%d") AS "feeding_date", Feedings.feeding_time, Feedings.feeding_description 
         FROM Feedings INNER JOIN Species ON Feedings.species_id = Species.species_id;`;
@@ -375,6 +373,42 @@ app.delete('/delete-feeding-ajax/', function(req,res,next){
                 res.sendStatus(204);
               }
   })});
+
+//update feeding date
+app.put('/put-feeding-ajax', function(req,res,next){
+    let data = req.body;
+    let feeding_id = parseInt(data.feeding_id);
+    let feeding_date = data.feeding_date; 
+    
+    let queryUpdateDate = `UPDATE Feedings SET Feedings.feeding_date = '${feeding_date}' WHERE Feedings.feeding_id = '${feeding_id}';`;
+    let selectFeeding = `SELECT * FROM Feedings WHERE Feedings.feeding_id = '${feeding_id}';`
+    
+            // Run the 1st query
+            db.pool.query(queryUpdateDate, [feeding_id, feeding_date], function(error, rows, fields){
+                if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+                }
+    
+                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // table on the front-end
+                else
+                {
+                    // Run the second query
+                    db.pool.query(selectFeeding, [feeding_id], function(error, rows, fields) {
+    
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.send(rows);
+                        }
+                    })
+                }
+    })
+});
 
 //Feedings_Kitchens
 app.get('/feedings_kitchens', function(req, res)
