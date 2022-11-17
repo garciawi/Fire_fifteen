@@ -58,8 +58,8 @@
         <label for="input-zookeeper">Zookeeper: </label>
         <select name="input-zookeeper" id="input-zookeeper">
             <option value="">Select a Zookeeper</option>
-            {{#each zookeeper}}
-            <option value="{{this.zookeeper_id}}">{{this.zookeeper_name}}</option>
+            {{#each zookeepers}}
+            <option value="{{this.zookeeper_id}}">{{this.first_name}}</option>
             {{/each}}
         </select>
         </p>

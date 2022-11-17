@@ -188,20 +188,7 @@ app.delete('/delete-diets-ajax/', function(req,res,next){
               }
   })});
 
-//Feedings
-// app.get('/feedings', function(req, res)
-// {
-//     let query1 = `
-//     SELECT Feedings.feeding_id, Feedings.species_id, Species.species_name, Feedings.zookeeper_id, 
-//     DATE_FORMAT(Feedings.feeding_date, "%Y-%m-%d") AS "feeding_date", Feedings.feeding_time, Feedings.feeding_description 
-//     FROM Feedings 
-//     INNER JOIN Species ON Feedings.species_id = Species.species_id;`;
 
-//     db.pool.query(query1, function(error, rows, fields){
-
-//         res.render('feedings', {data: rows});
-//     })
-// });
 app.get('/feedings', function(req, res)
 {
     let query1;
@@ -233,26 +220,26 @@ app.get('/feedings', function(req, res)
 
                 let species = rows;
 
-                let speciesmap = {}
-                    species.map(Species => {
-                        let id = parseInt(Species.species_id, 10);
+                // let speciesmap = {}
+                //     species.map(Species => {
+                //         let id = parseInt(Species.species_id, 10);
 
-                        speciesmap[id] = Species["species_name"];
-                    })
+                //         speciesmap[id] = Species["species_name"];
+                //     })
                 
-                let zookeepersmap = {}
-                    zookeepers.map(Zookeepers => {
-                        let id = parseInt(Zookeepers.zookeeper_id, 10);
+                // let zookeepersmap = {}
+                //     zookeepers.map(Zookeepers => {
+                //         let id = parseInt(Zookeepers.zookeeper_id, 10);
 
-                        zookeepersmap[id] = Zookeepers["first_name"];
-                    })
+                //         zookeepersmap[id] = Zookeepers["first_name"];
+                //     })
 
-                    feedings = feedings.map(Feeding => {
-                        return Object.assign(Feeding, {species_id: speciesmap[Feeding.species_id], zookeeper_id: zookeepersmap[zookeepers.zookeeper_id]})
-                    })
+                //     feedings = feedings.map(Feeding => {
+                //         return Object.assign(Feeding, {species_id: speciesmap[Feeding.species_id], zookeeper_id: zookeepersmap[zookeepers.zookeeper_id]})
+                //     })
 
 
-                return res.render('feedings', {data: feedings, species: species, zookeepers: zookeepers});
+                return res.render('feedings', {data: feedings, zookeepers: zookeepers, species: species});
             })
         })
     })//end of db.pool.query(query1,...)
