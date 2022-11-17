@@ -1,7 +1,26 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <h2>
     Animals
 </h2>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+{{!-- Search an animal form --}}
+<form id="search-animal-form-html" method='GET' action="/animals">
+    <fieldset class="fields">
+        <legend><strong>Search Animal</strong></legend>
+        Search animal names using the field below. Partial names are OK too!
+
+        <p>
+            <label for="input-name">Search by Name: </label>
+            <input type="text" name="name" id="input-name-html-search">
+        </p>
+
+        <p>
+            <input class="btn" type="submit" value="Submit">
+            <button href='/animals'>Reset</button>
+        </p>
+    </fieldset>
+</form>
+<p>&nbsp;</p>
 
 {{!-- Create a table --}}
 <table id="animals-table" border="1" cellpadding="5">
@@ -33,25 +52,6 @@
     </tbody>
 </table>
 <script src="./js/delete_animal.js"></script>
-<p>&nbsp;</p>
-
-{{!-- Search an animal form --}}
-<form id="search-animal-form-html" method='GET' action="/animals">
-    <fieldset class="fields">
-        <legend><strong>Search Animal</strong></legend>
-        Search animal names using the field below. Partial names are OK too!
-
-        <p>
-            <label for="input-name">Search by Name: </label>
-            <input type="text" name="name" id="input-name-html-search">
-        </p>
-
-        <p>
-            <input class="btn" type="submit" value="Submit">
-            <button href='/animals'>Reset</button>
-        </p>
-    </fieldset>
-</form>
 <p>&nbsp;</p>
 
 {{!-- Add an animal form --}}
