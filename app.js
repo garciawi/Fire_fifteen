@@ -134,38 +134,29 @@ app.get('/diets', function(req, res)
 });
 
 // Add diets
-
 app.post('/add-diets-ajax', function(req, res) 
 {
-    // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Create the query and run it on the database
     query1 = `INSERT INTO Diets(diet_type) VALUES ('${data.diet_type}');`;
 
     db.pool.query(query1, function(error, rows, fields){
 
-        // Check to see if there was an error
         if (error) {
 
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error)
             res.sendStatus(400);
         }
         else
         {
-            // If there was no error, perform a SELECT * on bsg_people
             query2 = `SELECT * FROM Diets;`;
             db.pool.query(query2, function(error, rows, fields){
 
-                // If there was an error on the second query, send a 400
                 if (error) {
                     
-                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
                     console.log(error);
                     res.sendStatus(400);
                 }
-                // If all went well, send the results of the query back.
                 else
                 {
                     res.send(rows);
@@ -220,13 +211,58 @@ app.get('/feedings_kitchens', function(req, res)
     FROM Feedings_Kitchens
     INNER JOIN Kitchens ON Feedings_Kitchens.kitchen_id = Kitchens.kitchen_id;`;
 
+    let query2 = `SELECT Feedings.feeding_id FROM Feedings ORDER BY Feedings.feeding_id ASC;`;
+
+    let query3 = `SELECT * FROM Kitchens;`;
+
     db.pool.query(query1, function(error, rows, fields){
 
-        res.render('feedings_kitchens', {data: rows});
+        let feedings_kitchens = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+
+            let feedings = rows;
+
+            db.pool.query(query3, (error, rows, fields) => {
+
+                let kitchens = rows;
+
+                return res.render('feedings_kitchens', {data: feedings_kitchens, feedings: feedings, kitchens: kitchens});
+            })
+        })
     })
 });
 
-//Kitchens
+// Add Feeding_Kitchen
+app.post('/add-intersection-ajax', function(req, res) {
+    let data = req.body;
+
+    query1 = `INSERT INTO Feedings_Kitchens (feeding_id, kitchen_id)
+    VALUES ('${data.feeding_id}', '${data.kitchen_id}')`;
+
+    db.pool.query(query1, function(error, rows, fields) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            query2 = `SELECT Feedings_Kitchens.feeding_kitchen_id, Feedings_Kitchens.feeding_id, 
+            Feedings_Kitchens.kitchen_id, Kitchens.name
+            FROM Feedings_Kitchens
+            INNER JOIN Kitchens ON Feedings_Kitchens.kitchen_id = Kitchens.kitchen_id;`;
+            
+            db.pool.query(query2, function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+// Kitchens
 app.get('/kitchens', function(req, res)
 {
     let query1 = "SELECT * FROM Kitchens;";
