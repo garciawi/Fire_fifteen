@@ -312,25 +312,6 @@ app.get('/feedings', function(req, res)
 
                 let species = rows;
 
-                // let speciesmap = {}
-                //     species.map(Species => {
-                //         let id = parseInt(Species.species_id, 10);
-
-                //         speciesmap[id] = Species["species_name"];
-                //     })
-                
-                // let zookeepersmap = {}
-                //     zookeepers.map(Zookeepers => {
-                //         let id = parseInt(Zookeepers.zookeeper_id, 10);
-
-                //         zookeepersmap[id] = Zookeepers["first_name"];
-                //     })
-
-                //     feedings = feedings.map(Feeding => {
-                //         return Object.assign(Feeding, {species_id: speciesmap[Feeding.species_id], zookeeper_id: zookeepersmap[zookeepers.zookeeper_id]})
-                //     })
-
-
                 return res.render('feedings', {data: feedings, zookeepers: zookeepers, species: species});
             })
         })
@@ -341,7 +322,7 @@ app.get('/feedings', function(req, res)
 //Add a Feeding
 app.post('/add-feeding-ajax', function(req, res) {
     let data = req.body;
-
+    //console.log("in app.js data is:", data)
     //Capture NULL values for Zookeeper
     let zookeeper_id = parseInt(data.zookeeper_id);
     if (isNaN(zookeeper_id)) {
@@ -364,6 +345,7 @@ app.post('/add-feeding-ajax', function(req, res) {
                     console.log(error);
                     res.sendStatus(400);
                 } else {
+                    //console.log("after query2 is called rows is", rows)
                     res.send(rows);
                 }
             })

@@ -25,9 +25,9 @@ addFeedingForm.addEventListener("submit", function (e) {
     let data = {
         species_id: speciesId,
         zookeeper_id: zookeeperId,
-        date : dateInput,
-        time : timeInput,
-        description : descriptionInput
+        feeding_date : dateInput,
+        feeding_time : timeInput,
+        feeding_description : descriptionInput
     }
 
     // Setup our AJAX request
@@ -43,9 +43,11 @@ addFeedingForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            inputName.value = '';
-            inputSpecies.value = '';
-            inputIsSick.value = '';
+            inputSpeciesId.value = '';
+            inputZookeeperId.value = '';
+            inputDate.value = '';
+            inputTime.value = '';
+            inputDescription.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -59,7 +61,7 @@ addFeedingForm.addEventListener("submit", function (e) {
 
 // Creates a single row from an Object
 addRowToTable = (data) => {
-
+    // console.log("in add_feedings.js in addRowToTable data is:", data)
     // Get a reference to the current table on the page and clear it out.
     let currentTable = document.getElementById("feedings-table");
 
