@@ -284,9 +284,10 @@ app.delete('/delete-diets-ajax/', function(req,res,next){
 app.get('/feedings', function(req, res)
 {
     let query1;
-
+    console.log("the /feedings route called with req.query:", req.query)
     // If there is no query string, we just perform a basic SELECT
-    if (req.query.name === undefined){
+    if (req.query.feeding_date === undefined){
+        console.log('req.query.name was undefined')
         query1 = `SELECT Feedings.feeding_id, Feedings.species_id, Species.species_name, Feedings.zookeeper_id, 
         DATE_FORMAT(Feedings.feeding_date, "%Y-%m-%d") AS "feeding_date", Feedings.feeding_time, Feedings.feeding_description 
         FROM Feedings INNER JOIN Species ON Feedings.species_id = Species.species_id;`;
@@ -294,7 +295,10 @@ app.get('/feedings', function(req, res)
     // If there is a query string, we assume this is a search, and return desired results
     else
     {
-        query1 = `SELECT * FROM Feedings WHERE Feedings.feeding_date LIKE "%${req.query.feeding_date}%"`
+        console.log("proper else condition line 296 req.query is:",req.query.feeding_date);
+        query1 = `SELECT * FROM Feedings WHERE Feedings.feeding_date="${req.query.feeding_date}";`
+        console.log("query1 is now:", query1)
+
     }
 
     let query2 = "SELECT * FROM Zookeepers;";
@@ -304,7 +308,6 @@ app.get('/feedings', function(req, res)
     // Using an array to overwrite species_id with species_name
     db.pool.query(query1, function(error, rows, fields){
         let feedings = rows;
-
         db.pool.query(query2, function(error, rows, fields){
             let zookeepers = rows;
 

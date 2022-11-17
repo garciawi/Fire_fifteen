@@ -1,6 +1,23 @@
 <h2>
     Feedings
 </h2>
+{{!-- Search for a feeding form --}}
+<form id="search-feeding-form-html" method='GET' action="/feedings">
+    <fieldset class="fields">
+        <legend><strong>Search Feeding by date</strong></legend>
+        Search feedings by date using the field below.
+
+        <p>
+            <label for="input-date">Date: </label>
+            <input type="date" name="feeding_date" id="input-date-html-search" value="2022-11-16" required></input>
+        </p>
+        <p>
+            <input class="btn" type="submit" value="Submit">
+            <button href='/feedings'>Reset</button>
+        </p>
+    </fieldset>
+</form>
+<p>&nbsp;</p>
 
 {{!-- Create a table --}}
 <table id="feedings-table" border="1" cellpadding="5">
