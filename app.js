@@ -166,7 +166,9 @@ app.put('/put-animal-ajax', function(req,res,next){
 // Species
 app.get('/species', function(req, res)
 {
-    let query1 = "SELECT Species.species_id, Species.species_name, Diets.diet_type FROM Species JOIN Diets ON Species.diet_id = Diets.diet_id;";
+    let query1 = `SELECT Species.species_id, Species.species_name, Diets.diet_type 
+    FROM Species JOIN Diets ON Species.diet_id = Diets.diet_id
+    GROUP BY Species.species_id ASC;`;
     let query2 = `SELECT * FROM Diets;`;
 
     // Run the 1st query
@@ -197,7 +199,8 @@ app.post('/add-species-ajax', function(req, res) {
             res.sendStatus(400);
         } else {
             query2 = `SELECT Species.species_id, Species.species_name, Diets.diet_type 
-            FROM Species JOIN Diets ON Species.diet_id = Diets.diet_id;`;
+            FROM Species JOIN Diets ON Species.diet_id = Diets.diet_id
+            GROUP BY Species.species_id ASC;`;
             
             db.pool.query(query2, function(error, rows, fields){
                 if (error) {
