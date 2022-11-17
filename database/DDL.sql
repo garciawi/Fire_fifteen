@@ -71,7 +71,7 @@ CREATE TABLE `Feedings_Kitchens` (
     kitchen_id int NOT NULL,
     PRIMARY KEY (feeding_kitchen_id),
     FOREIGN KEY (feeding_id) REFERENCES Feedings(feeding_id) ON DELETE CASCADE,
-    FOREIGN KEY (kitchen_id) REFERENCES Kitchens(kitchen_id) ON DELETE CASCADE
+    FOREIGN KEY (kitchen_id) REFERENCES Kitchens(kitchen_id)
 );
 
 -- Insert Data into Diets Table

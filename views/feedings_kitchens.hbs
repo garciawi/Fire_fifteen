@@ -3,7 +3,7 @@
 </h2>
 
 {{!-- Create a table --}}
-<table border="1" cellpadding="5">
+<table id="feedings-kitchens-table" border="1" cellpadding="5">
 
     {{!-- Header section --}}
     <thead>
@@ -12,6 +12,7 @@
             <th>Feeding Id</th>
             <th>Kitchen Id</th>
             <th>Kitchen Name</th>
+            <th>Delete</th>
         </tr>
     </thead>
 
@@ -23,9 +24,46 @@
             <td>{{this.feeding_id}}</td>
             <td>{{this.kitchen_id}}</td>
             <td>{{this.name}}</td>
+            <td align="middle">
+                <button class="delete" onClick="deleteKitchen({{this.kitchen_id}})">Delete</button>
+            </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<script src="./js/delete_intersection.js"></script>
+<p>&nbsp;</p>
 
+{{!-- Add a Feedings_Kitchens form --}}
+<form id="add-intersection-form-ajax">
+    <fieldset class="fields">
+        <legend><strong>Add Feeding_Kitchen</strong></legend>
+        Fill out form to add the kitchen that made the feeding.
+
+        <p>
+            <label for="input-feeding">Feeding: </label>
+            <select name="input-feeding" id="input-feeding">
+                <option value="">Select a Feeding</option>
+                {{#each feedings}}
+                <option value="{{this.feeding_id}}">{{this.feeding_id}}</option>
+                {{/each}}
+            </select>
+        </p>
+        
+        <p>
+            <label for="input-kitchen">Kitchen: </label>
+            <select name="input-kitchen" id="input-kitchen">
+                <option value="">Select a Kitchen</option>
+                {{#each kitchens}}
+                <option value="{{this.kitchen_id}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </p>
+
+        <p>
+        <input class="btn" type="submit" value="Submit">
+        </p>
+    </fieldset>
+</form>
+<script src="./js/add_intersection.js"></script>
 <p>&nbsp;</p>
