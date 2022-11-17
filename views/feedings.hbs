@@ -3,7 +3,7 @@
 </h2>
 
 {{!-- Create a table --}}
-<table border="1" cellpadding="5">
+<table id="feedings-table" border="1" cellpadding="5">
 
     {{!-- Header section --}}
     <thead>
@@ -22,7 +22,7 @@
     {{!-- Body section --}}
     <tbody>
         {{#each data}}
-        <tr>
+        <tr data-value={{this.feeding_id}}>
             <td>{{this.feeding_id}}</td>
             <td>{{this.species_id}}</td>
             <td>{{this.species_name}}</td>
@@ -38,4 +38,53 @@
     </tbody>
 </table>
 
+<p>&nbsp;</p>
+{{!-- Add a Feeding form --}}
+<form id="add-feeding-form-ajax">
+    <fieldset class="fields">
+        <legend><strong>Add a Feeding</strong></legend>
+            
+        <p>
+        <label for="input-species">Species: </label>
+        <select name="input-species" id="input-species">
+            <option value="">Select a Species</option>
+            {{#each species}}
+            <option value="{{this.species_id}}">{{this.species_name}}</option>
+            {{/each}}
+        </select>
+        </p>
+
+        <p>
+        <label for="input-zookeeper">Zookeeper: </label>
+        <select name="input-zookeeper" id="input-zookeeper">
+            <option value="">Select a Zookeeper</option>
+            {{#each zookeeper}}
+            <option value="{{this.zookeeper_id}}">{{this.zookeeper_name}}</option>
+            {{/each}}
+        </select>
+        </p>
+        
+        <p>
+        <label for="input-date">Date: </label>
+        <input type="date" name="input-date" id="input-date" value="2022-11-16" required></input>
+        </p>
+
+        <p>
+        <label for="input-time">Time: </label>
+        <input type="time" name="input-time" id="input-time" required></input>
+        <small>Feedings are 24/7 since some of our animals are nocturnal</small>
+        </p>
+
+        <p>
+        <label for="input-description">Description of feeding: </label>
+        <input type="text" name="input-description" id="input-description" maxlength="40"></input>
+        <small>Max length of 40 characters</small>
+        </p>
+        
+        <p>
+        <input class="btn" type="submit" value="Submit">
+        </p>
+    </fieldset>
+</form>
+<script src="./js/add_feedings.js"></script>
 <p>&nbsp;</p>

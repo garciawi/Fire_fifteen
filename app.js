@@ -134,7 +134,6 @@ app.get('/diets', function(req, res)
 });
 
 // Add diets
-
 app.post('/add-diets-ajax', function(req, res) 
 {
     // Capture the incoming data and parse it back to a JS object
@@ -177,17 +176,99 @@ app.post('/add-diets-ajax', function(req, res)
 
 
 //Feedings
+// app.get('/feedings', function(req, res)
+// {
+//     let query1 = `
+//     SELECT Feedings.feeding_id, Feedings.species_id, Species.species_name, Feedings.zookeeper_id, 
+//     DATE_FORMAT(Feedings.feeding_date, "%Y-%m-%d") AS "feeding_date", Feedings.feeding_time, Feedings.feeding_description 
+//     FROM Feedings 
+//     INNER JOIN Species ON Feedings.species_id = Species.species_id;`;
+
+//     db.pool.query(query1, function(error, rows, fields){
+
+//         res.render('feedings', {data: rows});
+//     })
+// });
 app.get('/feedings', function(req, res)
 {
-    let query1 = `
-    SELECT Feedings.feeding_id, Feedings.species_id, Species.species_name, Feedings.zookeeper_id, 
-    DATE_FORMAT(Feedings.feeding_date, "%Y-%m-%d") AS "feeding_date", Feedings.feeding_time, Feedings.feeding_description 
-    FROM Feedings 
-    INNER JOIN Species ON Feedings.species_id = Species.species_id;`;
+    let query1;
 
+    // If there is no query string, we just perform a basic SELECT
+    if (req.query.name === undefined){
+        query1 = `SELECT Feedings.feeding_id, Feedings.species_id, Species.species_name, Feedings.zookeeper_id, 
+        DATE_FORMAT(Feedings.feeding_date, "%Y-%m-%d") AS "feeding_date", Feedings.feeding_time, Feedings.feeding_description 
+        FROM Feedings INNER JOIN Species ON Feedings.species_id = Species.species_id;`;
+    }
+    // If there is a query string, we assume this is a search, and return desired results
+    else
+    {
+        query1 = `SELECT * FROM Feedings WHERE Feedings.feeding_date LIKE "%${req.query.feeding_date}%"`
+    }
+
+    let query2 = "SELECT * FROM Zookeepers;";
+    let query3 = "SELECT * FROM Species;";
+    
+
+    // Using an array to overwrite species_id with species_name
     db.pool.query(query1, function(error, rows, fields){
+        let feedings = rows;
 
-        res.render('feedings', {data: rows});
+        db.pool.query(query2, function(error, rows, fields){
+            let zookeepers = rows;
+
+            db.pool.query(query3, (error, rows, fields) => {
+
+                let species = rows;
+
+                let speciesmap = {}
+                    species.map(Species => {
+                        let id = parseInt(Species.species_id, 10);
+
+                        speciesmap[id] = Species["species_name"];
+                    })
+                
+                let zookeepersmap = {}
+                    zookeepers.map(Zookeepers => {
+                        let id = parseInt(Zookeepers.zookeeper_id, 10);
+
+                        zookeepersmap[id] = Zookeepers["first_name"];
+                    })
+
+                    feedings = feedings.map(Feeding => {
+                        return Object.assign(Feeding, {species_id: speciesmap[Feeding.species_id], zookeeper_id: zookeepersmap[zookeepers.zookeeper_id]})
+                    })
+
+
+                return res.render('feedings', {data: feedings, species: species, zookeepers: zookeepers});
+            })
+        })
+    })//end of db.pool.query(query1,...)
+});
+
+
+//Add a Feeding
+app.post('/add-feeding-ajax', function(req, res) {
+    let data = req.body;
+    query1 = `INSERT INTO Feedings(species_id, zookeeper_id, feeding_date, feeding_time, feeding_description)
+    VALUES ('${data.species_id}', '${data.zookeeper_id}', '${data.feeding_date}', '${data.feeding_time}', '${data.feeding_description}')`;
+
+    db.pool.query(query1, function(error, rows, fields) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            let query2 = `SELECT Feedings.feeding_id, Feedings.species_id, Species.species_name, Feedings.zookeeper_id, 
+                    DATE_FORMAT(Feedings.feeding_date, "%Y-%m-%d") AS "feeding_date", Feedings.feeding_time, Feedings.feeding_description 
+                    FROM Feedings INNER JOIN Species ON Feedings.species_id = Species.species_id;`;
+            db.pool.query(query2, function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
     })
 });
 
