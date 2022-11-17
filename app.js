@@ -341,6 +341,13 @@ app.get('/feedings', function(req, res)
 //Add a Feeding
 app.post('/add-feeding-ajax', function(req, res) {
     let data = req.body;
+
+    //Capture NULL values for Zookeeper
+    let zookeeper_id = parseInt(data.zookeeper_id);
+    if (isNaN(zookeeper_id)) {
+        zookeeper_id = 'NULL'
+    }
+
     query1 = `INSERT INTO Feedings(species_id, zookeeper_id, feeding_date, feeding_time, feeding_description)
     VALUES ('${data.species_id}', '${data.zookeeper_id}', '${data.feeding_date}', '${data.feeding_time}', '${data.feeding_description}')`;
 
