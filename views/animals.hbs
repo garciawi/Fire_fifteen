@@ -14,7 +14,6 @@
             <th>Species</th>
             <th>Sick</th>
             <th>Delete</th>
-            <th>Edit</th>
         </tr>
     </thead>
 
@@ -28,9 +27,6 @@
             <td>{{this.is_sick}}</td>
             <td align="middle">
                 <button class="delete" onClick="deleteAnimal({{this.animal_id}})">Delete</button>
-            </td>
-            <td align="middle">
-                <button class="edit" onClick="editAnimal({{this.animal_id}})">Edit</button>
             </td>
         </tr>
         {{/each}}
@@ -79,6 +75,7 @@
         <p>
         <label for="input-is-sick">Sick:  </label>
         <select name="input-is-sick" id="input-is-sick">
+            <option>Select Sick Status</option>
             <option value="0">No</option>
             <option value="1">Yes</option>
         </select>
@@ -118,7 +115,7 @@
     </p>
 
     <p>
-        <input type="submit">
+        <input class="btn" type="submit" value="Submit">
     </p>
 
     </fieldset>

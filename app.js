@@ -74,6 +74,95 @@ app.get('/animals', function(req, res)
     })
 });
 
+// Add Animals
+app.post('/add-animal-ajax', function(req, res) {
+    let data = req.body;
+
+    query1 = `INSERT INTO Animals(name, species_id, is_sick)
+    VALUES ('${data.name}', '${data.species_id}', '${data.is_sick}')`;
+
+    db.pool.query(query1, function(error, rows, fields) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        } else {
+            query2 = `SELECT Animals.animal_id, Animals.name, Species.species_name, Animals.is_sick FROM Animals 
+            JOIN Species ON Animals.species_id = Species.species_id
+            GROUP BY Animals.animal_id ASC;`;
+            
+            db.pool.query(query2, function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
+// Delete Animals
+app.delete('/delete-animal-ajax/', function(req,res,next){
+    let data = req.body;
+    let animal_id = parseInt(data.id);
+    let deleteAnimals = `DELETE FROM Animals WHERE Animals.animal_id = '${animal_id}';`;
+
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteAnimals, [animal_id], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                res.sendStatus(204);
+              }
+  })
+});
+
+//update animal sickness
+app.put('/put-animal-ajax', function(req,res,next){
+    let data = req.body;
+    
+    let animal_id = parseInt(data.animal_id);
+    let sickStatus = parseInt(data.is_sick);
+    
+    let queryUpdateSick = `UPDATE Animals SET Animals.is_sick = '${sickStatus}' WHERE Animals.animal_id = '${animal_id}';`;
+    let selectAnimal = `SELECT * FROM Animals WHERE Animals.animal_id = '${animal_id}';`
+    
+            // Run the 1st query
+            db.pool.query(queryUpdateSick, [animal_id, sickStatus], function(error, rows, fields){
+                if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+                }
+    
+                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // table on the front-end
+                else
+                {
+                    // Run the second query
+                    db.pool.query(selectAnimal, [animal_id], function(error, rows, fields) {
+    
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.send(rows);
+                        }
+                    })
+                }
+    })
+});
+
 // Species
 app.get('/species', function(req, res)
 {
@@ -447,94 +536,6 @@ app.delete('/delete-zookeeper-ajax', function(req,res,next){
                 res.sendStatus(204);
               }
   })});
-
-// Add Animals
-app.post('/add-animal-ajax', function(req, res) {
-    let data = req.body;
-
-    query1 = `INSERT INTO Animals(name, species_id, is_sick)
-    VALUES ('${data.name}', '${data.species_id}', '${data.is_sick}')`;
-
-    db.pool.query(query1, function(error, rows, fields) {
-        if (error) {
-            console.log(error)
-            res.sendStatus(400);
-        } else {
-            query2 = `SELECT Animals.animal_id, Animals.name, Species.species_name, Animals.is_sick FROM Animals 
-            JOIN Species ON Animals.species_id = Species.species_id
-            GROUP BY Animals.animal_id ASC;`;
-            
-            db.pool.query(query2, function(error, rows, fields){
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400);
-                } else {
-                    res.send(rows);
-                }
-            })
-        }
-    })
-});
-
-// Delete Animals
-app.delete('/delete-animal-ajax/', function(req,res,next){
-    let data = req.body;
-    let animal_id = parseInt(data.id);
-    let deleteAnimals = `DELETE FROM Animals WHERE Animals.animal_id = '${animal_id}';`;
-
-  
-  
-          // Run the 1st query
-          db.pool.query(deleteAnimals, [animal_id], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              else
-              {
-                res.sendStatus(204);
-              }
-  })});
-
-  //update animal sickness
-  app.put('/put-animal-ajax', function(req,res,next){
-    let data = req.body;
-    
-    let animal_id = parseInt(data.animal_id);
-    let sickStatus = parseInt(data.is_sick);
-    
-    let queryUpdateSick = `UPDATE Animals SET Animals.is_sick = '${sickStatus}' WHERE Animals.animal_id = '${animal_id}';`;
-    let selectAnimal = `SELECT * FROM Animals WHERE Animals.animal_id = '${animal_id}';`
-    
-            // Run the 1st query
-            db.pool.query(queryUpdateSick, [animal_id, sickStatus], function(error, rows, fields){
-                if (error) {
-    
-                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                console.log(error);
-                res.sendStatus(400);
-                }
-    
-                // If there was no error, we run our second query and return that data so we can use it to update the people's
-                // table on the front-end
-                else
-                {
-                    // Run the second query
-                    db.pool.query(selectAnimal, [animal_id], function(error, rows, fields) {
-    
-                        if (error) {
-                            console.log(error);
-                            res.sendStatus(400);
-                        } else {
-                            res.send(rows);
-                        }
-                    })
-                }
-    })});
-    
 
 
 /*

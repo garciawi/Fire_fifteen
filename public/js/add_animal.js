@@ -71,7 +71,6 @@ addRowToTable = (data) => {
     let speciesCell = document.createElement("TD");
     let issickCell = document.createElement("TD");
     let deleteCell = document.createElement("TD");
-    let editCell = document.createElement("TD");
 
     // Fill the cells with correct data
     animalIdCell.innerText = newRow.animal_id;
@@ -85,19 +84,12 @@ addRowToTable = (data) => {
         deleteAnimal(newRow.animal_id);
     };
 
-    editCell = document.createElement("button");
-    editCell.innerHTML = "Edit";
-    editCell.onclick = function(){
-        editAnimal(newRow.animal_id);
-    };
-
     // Add the cells to the row 
     row.appendChild(animalIdCell);
     row.appendChild(nameCell);
     row.appendChild(speciesCell);
     row.appendChild(issickCell);
     row.appendChild(deleteCell);
-    row.appendChild(editCell);
 
     row.setAttribute('data-value', newRow.animal_id)
 
@@ -112,5 +104,7 @@ addRowToTable = (data) => {
     option.text = newRow.name;
     option.value = newRow.is_sick;
     selectMenu.add(option);
+
+    window.location.reload();
 
 }
