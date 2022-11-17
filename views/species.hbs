@@ -38,13 +38,12 @@
         <p>
         <label for="input-diet">Diet Type: </label>
         <select name="input-diet" id="input-diet">
-            <option value="">Select a Diet</option>
+            <option>Select a Diet</option>
             {{#each diets}}
             <option value="{{this.diet_id}}">{{this.diet_type}}</option>
             {{/each}}
         </select>
         </p>
-
 
         <p>
         <input class="btn" type="submit" value="Submit">
