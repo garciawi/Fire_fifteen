@@ -129,4 +129,6 @@ addRowToTable = (data) => {
     // option.value = newRow.is_sick;
     // selectMenu.add(option);
 
+    window.location.reload();
+
 }
