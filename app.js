@@ -167,7 +167,7 @@ app.put('/put-animal-ajax', function(req,res,next){
 app.get('/species', function(req, res)
 {
     let query1 = `SELECT Species.species_id, Species.species_name, Diets.diet_type 
-    FROM Species JOIN Diets ON Species.diet_id = Diets.diet_id
+    FROM Species LEFT JOIN Diets ON Species.diet_id = Diets.diet_id
     GROUP BY Species.species_id ASC;`;
     let query2 = `SELECT * FROM Diets;`;
 
