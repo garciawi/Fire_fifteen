@@ -1,7 +1,7 @@
 
 // Get the objects we need to modify
 console.log("it arrived at update_feeding.js");
-let updateFeedingForm = document.getElementById('updateFeedingDate');
+let updateFeedingForm = document.getElementById('updateFeeding');
 
 // Modify the objects we need
 updateFeedingForm.addEventListener("submit", function (e) {
@@ -11,25 +11,28 @@ updateFeedingForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputFeedingId = document.getElementById("mySelect");
+    let inputUpdateSpecies = document.getElementById("input-update-species");
+    let inputUpdateZookeeper = document.getElementById("input-update-zookeeper");
     let inputUpdateDate = document.getElementById("input-update-date");
+    let inputUpdateTime = document.getElementById("input-update-time");
+    let inputUpdateDescription = document.getElementById("input-update-description");
 
     // Get the values from the form fields
     let feeding_id = inputFeedingId.value;
+    let species_id = inputUpdateSpecies.value;
+    let zookeeper_id = inputUpdateZookeeper.value;
     let feeding_date = inputUpdateDate.value;
-    
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
-
-    // if (isNaN(sicknessValue)) 
-    // {
-    //     return;
-    // }
-
+    let feeding_time = inputUpdateTime.value;
+    let feeding_description = inputUpdateDescription.value;
 
     // Put our data we want to send in a javascript object
     let data = {
         feeding_id: feeding_id,
+        species_id: species_id,
+        zookeeper_id: zookeeper_id,
         feeding_date: feeding_date,
+        feeding_time: feeding_time,
+        feeding_description: feeding_description
     }
  
     
@@ -67,14 +70,21 @@ function updateRow(data, feeding_id){
        //rows would be accessed using the "row" variable assigned in the for loop
        if (table.rows[i].getAttribute("data-value") == feeding_id) {
 
-            // Get the location of the row where we found the matching animal name
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-            // Get td of sickness value
-            let td = updateRowIndex.getElementsByTagName("td")[4];
+            let speciesTd = updateRowIndex.getElementsByTagName("td")[2];
+            let zookeeperTd = updateRowIndex.getElementsByTagName("td")[3];
+            let dateTd = updateRowIndex.getElementsByTagName("td")[4];
+            let timeTd = updateRowIndex.getElementsByTagName("td")[5];
+            let descriptionTd = updateRowIndex.getElementsByTagName("td")[6];
             
-            // Reassign sick status to our value we updated to
-            td.innerHTML = parsedData[0].feeding_date; 
+            speciesTd.innerHTML = parsedData[0].species_id;
+            zookeeperTd.innerHTML = parsedData[0].zookeeper_id;
+            dateTd.innerHTML = parsedData[0].feeding_date;
+            timeTd.innerHTML = parsedData[0].feeding_time;
+            descriptionTd.innerHTML = parsedData[0].feeding_description;
        }
     }
+    
+    window.location.reload();
 }
