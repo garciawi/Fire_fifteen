@@ -4,12 +4,12 @@
 {{!-- Search for a feeding form --}}
 <form id="search-feeding-form-html" method='GET' action="/feedings">
     <fieldset class="fields">
-        <legend><strong>Search Feeding by date</strong></legend>
-        Search feedings by date using the field below.
+        <legend><strong>Search Feeding</strong></legend>
+        Search feedings by species using the field below.
 
         <p>
-            <label for="input-date">Date: </label>
-            <input type="date" name="feeding_date" id="input-date-html-search" value="2022-11-16" required></input>
+            <label for="input-species">Species: </label>
+            <input type="text" name="species" id="input-species-html-search">
         </p>
         <p>
             <input class="btn" type="submit" value="Submit">
@@ -61,11 +61,11 @@
 <form id="add-feeding-form-ajax">
     <fieldset class="fields">
         <legend><strong>Add a Feeding</strong></legend>
-            
+
         <p>
         <label for="input-species">Species: </label>
         <select name="input-species" id="input-species">
-            <option value="">Select a Species</option>
+            <option>Select a Species</option>
             {{#each species}}
             <option value="{{this.species_id}}">{{this.species_name}}</option>
             {{/each}}
@@ -76,16 +76,16 @@
         <label for="input-zookeeper">Zookeeper: </label>
         <select name="input-zookeeper" id="input-zookeeper">
             <option>Select a Zookeeper</option>
-            <option value="">None</option>
+            <option value="">&lt;None&gt;</option>
             {{#each zookeepers}}
-            <option value="{{this.zookeeper_id}}">{{this.first_name}}</option>
+            <option value="{{this.zookeeper_id}}">{{this.first_name}} {{this.last_name}}</option>
             {{/each}}
         </select>
         </p>
         
         <p>
         <label for="input-date">Date: </label>
-        <input type="date" name="input-date" id="input-date" value="2022-11-16" required></input>
+        <input type="date" name="input-date" id="input-date" required></input>
         </p>
 
         <p>
@@ -95,7 +95,7 @@
         </p>
 
         <p>
-        <label for="input-description">Description of feeding: </label>
+        <label for="input-description">Description: </label>
         <input type="text" name="input-description" id="input-description" maxlength="40"></input>
         <small>Max length of 40 characters</small>
         </p>
@@ -109,10 +109,11 @@
 <p>&nbsp;</p>
 
 {{!-- Update Feeding Form --}}
-<form id="updateFeedingDate">
+<form id="updateFeeding">
     <fieldset class="fields">
         <legend><strong>Update a Feeding date Form</strong></legend>
         To update a specific feeding's date, select a new date from drop down menu.
+
     <p>
     <label for="input-feeding">Feeding: </label>
     <select name="input-feeding" id="mySelect">
@@ -124,8 +125,40 @@
     </P>
 
     <p>
+        <label for="input-species">Species: </label>
+        <select name="input-update-species" id="input-update-species">
+            <option>Select a Species</option>
+            {{#each species}}
+            <option value="{{this.species_id}}">{{this.species_name}}</option>
+            {{/each}}
+        </select>
+    </p>
+
+    <p>
+        <label for="input-zookeeper">Zookeeper: </label>
+        <select name="input-update-zookeeper" id="input-update-zookeeper">
+            <option>Select a Zookeeper</option>
+            <option value="">&lt;None&gt;</option>
+            {{#each zookeepers}}
+            <option value="{{this.zookeeper_id}}">{{this.first_name}} {{this.last_name}}</option>
+            {{/each}}
+        </select>
+    </p>
+
+    <p>
         <label for="inputUpdateDate">Date: </label>
-        <input type="date" name="input-update-date" id="input-update-date" value="2022-11-16" required></input>
+        <input type="date" name="input-update-date" id="input-update-date" required></input>
+    </p>
+
+    <p>
+        <label for="input-time">Time: </label>
+        <input type="time" name="input-update-time" id="input-update-time" required></input>
+    </p>
+
+    <p>
+        <label for="input-description">Description: </label>
+        <input type="text" name="input-update-description" id="input-update-description" maxlength="40"></input>
+        <small>Max length of 40 characters</small>
     </p>
 
     <p>

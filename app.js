@@ -257,6 +257,7 @@ app.post('/add-diets-ajax', function(req, res)
         }
     })
 });
+
 // Delete diets
 app.delete('/delete-diets-ajax/', function(req,res,next){
     let data = req.body;
@@ -278,34 +279,33 @@ app.delete('/delete-diets-ajax/', function(req,res,next){
               {
                 res.sendStatus(204);
               }
-  })});
+  })
+});
 
-
+// Feedings
 app.get('/feedings', function(req, res)
 {
     let query1;
     // If there is no query string, we just perform a basic SELECT
-    if (req.query.feeding_date === undefined){
+    if (req.query.species === undefined){
         query1 = `SELECT Feedings.feeding_id, Feedings.species_id, Species.species_name, Feedings.zookeeper_id, 
         DATE_FORMAT(Feedings.feeding_date, "%Y-%m-%d") AS "feeding_date", Feedings.feeding_time, Feedings.feeding_description 
         FROM Feedings INNER JOIN Species ON Feedings.species_id = Species.species_id;`;
     }
-    // If there is a query string, we assume this is a search, and return desired results
     else
     {
-        console.log("proper else condition line 296 req.query is:",req.query.feeding_date);
-        query1 = `SELECT * FROM Feedings WHERE Feedings.feeding_date="${req.query.feeding_date}";`
-        console.log("query1 is now:", query1)
-
+        query1 = `SELECT Feedings.feeding_id, Feedings.species_id, Species.species_name, Feedings.zookeeper_id, 
+        DATE_FORMAT(Feedings.feeding_date, "%Y-%m-%d") AS "feeding_date", Feedings.feeding_time, Feedings.feeding_description 
+        FROM Feedings INNER JOIN Species ON Feedings.species_id = Species.species_id
+        WHERE lower(Species.species_name) LIKE "%${req.query.species}%"`
     }
 
     let query2 = "SELECT * FROM Zookeepers;";
     let query3 = "SELECT * FROM Species;";
     
-
-    // Using an array to overwrite species_id with species_name
     db.pool.query(query1, function(error, rows, fields){
         let feedings = rows;
+
         db.pool.query(query2, function(error, rows, fields){
             let zookeepers = rows;
 
@@ -316,14 +316,14 @@ app.get('/feedings', function(req, res)
                 return res.render('feedings', {data: feedings, zookeepers: zookeepers, species: species});
             })
         })
-    })//end of db.pool.query(query1,...)
+    })
 });
 
 
 //Add a Feeding
 app.post('/add-feeding-ajax', function(req, res) {
     let data = req.body;
-    //console.log("in app.js data is:", data)
+
     //Capture NULL values for Zookeeper
     let zookeeper_id = parseInt(data.zookeeper_id);
     if (isNaN(zookeeper_id)) {
@@ -378,13 +378,20 @@ app.delete('/delete-feeding-ajax/', function(req,res,next){
 app.put('/put-feeding-ajax', function(req,res,next){
     let data = req.body;
     let feeding_id = parseInt(data.feeding_id);
-    let feeding_date = data.feeding_date; 
+    let species_id = data.species_id;
+    let zookeeper_id = data.zookeeper_id;
+    let feeding_date = data.feeding_date;
+    let feeding_time = data.feeding_time;
+    let feeding_description = data.feeding_description;
 
-    let queryUpdateDate = `UPDATE Feedings SET Feedings.feeding_date = '${feeding_date}' WHERE Feedings.feeding_id = '${feeding_id}';`;
+    let queryUpdateDate = `UPDATE Feedings 
+    SET Feedings.species_id = '${species_id}', Feedings.zookeeper_id = '${zookeeper_id}', Feedings.feeding_date = '${feeding_date}',
+    Feedings.feeding_time = '${feeding_time}', Feedings.feeding_description = '${feeding_description}'
+    WHERE Feedings.feeding_id = '${feeding_id}';`;
     let selectFeeding = `SELECT * FROM Feedings WHERE Feedings.feeding_id = '${feeding_id}';`
     
             // Run the 1st query
-            db.pool.query(queryUpdateDate, [feeding_id, feeding_date], function(error, rows, fields){
+            db.pool.query(queryUpdateDate, [feeding_id, species_id, zookeeper_id, feeding_date, feeding_time, feeding_description], function(error, rows, fields){
                 if (error) {
     
                 // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
