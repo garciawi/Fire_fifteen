@@ -37,5 +37,4 @@ function deleteRow(zookeeper_id){
             break;
        }
     }
-    window.location.reload();
 }

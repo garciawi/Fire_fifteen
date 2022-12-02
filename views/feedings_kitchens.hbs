@@ -19,13 +19,13 @@
     {{!-- Body section --}}
     <tbody>
         {{#each data}}
-        <tr>
+        <tr data-value={{this.feeding_kitchen_id}}>
             <td>{{this.feeding_kitchen_id}}</td>
             <td>{{this.feeding_id}}</td>
             <td>{{this.kitchen_id}}</td>
             <td>{{this.name}}</td>
             <td align="middle">
-                <button class="delete" onClick="deleteKitchen({{this.kitchen_id}})">Delete</button>
+                <button class="delete" onClick="deleteFeedingKitchen({{this.feeding_kitchen_id}})">Delete</button>
             </td>
         </tr>
         {{/each}}
