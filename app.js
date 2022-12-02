@@ -126,7 +126,7 @@ app.delete('/delete-animal-ajax/', function(req,res,next){
   })
 });
 
-//update animal sickness
+// Update Animal sickness
 app.put('/put-animal-ajax', function(req,res,next){
     let data = req.body;
     
@@ -320,7 +320,7 @@ app.get('/feedings', function(req, res)
 });
 
 
-//Add a Feeding
+// Add Feeding
 app.post('/add-feeding-ajax', function(req, res) {
     let data = req.body;
 
@@ -374,7 +374,7 @@ app.delete('/delete-feeding-ajax/', function(req,res,next){
               }
   })});
 
-//update feeding date
+// Update Feeding
 app.put('/put-feeding-ajax', function(req,res,next){
     let data = req.body;
     let feeding_id = parseInt(data.feeding_id);
@@ -474,6 +474,30 @@ app.post('/add-intersection-ajax', function(req, res) {
             })
         }
     })
+});
+
+// Delete Feeding_Kitchen
+app.delete('/delete-feeding-kitchen-ajax/', function(req,res,next){
+    let data = req.body;
+    let feeding_kitchen_id = parseInt(data.id);
+    let deleteFeedingKitchen = `DELETE FROM Feedings_Kitchens WHERE Feedings_Kitchens.feeding_kitchen_id = '${feeding_kitchen_id}';`;
+
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteFeedingKitchen, [feeding_kitchen_id], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                res.sendStatus(204);
+              }
+  })
 });
 
 // Kitchens

@@ -37,5 +37,4 @@ function deleteRow(kitchen_id){
             break;
        }
     }
-    window.location.reload();
 }

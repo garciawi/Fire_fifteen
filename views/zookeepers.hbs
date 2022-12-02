@@ -19,7 +19,7 @@
     {{!-- Body section --}}
     <tbody>
         {{#each data}}
-        <tr>
+        <tr data-value={{this.zookeeper_id}}>
             <td>{{this.zookeeper_id}}</td>
             <td>{{this.first_name}}</td>
             <td>{{this.last_name}}</td>
