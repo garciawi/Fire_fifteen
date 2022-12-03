@@ -43,7 +43,7 @@
         <p>
             <label for="input-feeding">Feeding: </label>
             <select name="input-feeding" id="input-feeding">
-                <option value="">Select a Feeding</option>
+                <option>Select a Feeding</option>
                 {{#each feedings}}
                 <option value="{{this.feeding_id}}">{{this.feeding_id}}</option>
                 {{/each}}
@@ -53,7 +53,7 @@
         <p>
             <label for="input-kitchen">Kitchen: </label>
             <select name="input-kitchen" id="input-kitchen">
-                <option value="">Select a Kitchen</option>
+                <option>Select a Kitchen</option>
                 {{#each kitchens}}
                 <option value="{{this.kitchen_id}}">{{this.name}}</option>
                 {{/each}}
@@ -66,4 +66,49 @@
     </fieldset>
 </form>
 <script src="./js/add_intersection.js"></script>
+<p>&nbsp;</p>
+
+{{!-- Update Feedings_Kitchens Form --}}
+<form id="updateIntersection">
+    <fieldset class="fields">
+        <legend><strong>Update Feeding_Kitchen</strong></legend>
+
+        <p>
+            <label for="input-feedings-kitchens-id">Feedings_Kitchens Id: </label>
+            <select name="input-update-feedings-kitchens-id" id="input-update-feeding-kitchens-id">
+                <option>Select a Feedings_Kitchens Id</option>
+                {{#each data}}
+                <option value="{{this.feeding_kitchen_id}}">{{this.feeding_kitchen_id}}</option>
+                {{/each}}
+            </select>
+        </p>
+
+        <p>
+            <label for="input-feeding">Feeding: </label>
+            <select name="input-update-feeding" id="input-update-feeding">
+                <option>Select a Feeding</option>
+                {{#each feedings}}
+                <option value="{{this.feeding_id}}">{{this.feeding_id}}</option>
+                {{/each}}
+            </select>
+        </P>
+
+        <p>
+            <label for="input-kitchen">Kitchen: </label>
+            <select name="input-update-kitchen" id="input-update-kitchen">
+                <option>Select a Kitchen</option>
+                {{#each kitchens}}
+                <option value="{{this.kitchen_id}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </p>
+
+        <p>
+            <input class="btn" type="submit" value="Submit">
+        </p>
+
+    </fieldset>
+</form>
+<script src="./js/update_intersection.js"></script>
+
 <p>&nbsp;</p>

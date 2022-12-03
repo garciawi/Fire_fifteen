@@ -384,14 +384,14 @@ app.put('/put-feeding-ajax', function(req,res,next){
     let feeding_time = data.feeding_time;
     let feeding_description = data.feeding_description;
 
-    let queryUpdateDate = `UPDATE Feedings 
+    let queryUpdateFeeding = `UPDATE Feedings 
     SET Feedings.species_id = '${species_id}', Feedings.zookeeper_id = '${zookeeper_id}', Feedings.feeding_date = '${feeding_date}',
     Feedings.feeding_time = '${feeding_time}', Feedings.feeding_description = '${feeding_description}'
     WHERE Feedings.feeding_id = '${feeding_id}';`;
     let selectFeeding = `SELECT * FROM Feedings WHERE Feedings.feeding_id = '${feeding_id}';`
     
             // Run the 1st query
-            db.pool.query(queryUpdateDate, [feeding_id, species_id, zookeeper_id, feeding_date, feeding_time, feeding_description], function(error, rows, fields){
+            db.pool.query(queryUpdateFeeding, [feeding_id, species_id, zookeeper_id, feeding_date, feeding_time, feeding_description], function(error, rows, fields){
                 if (error) {
     
                 // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -417,7 +417,7 @@ app.put('/put-feeding-ajax', function(req,res,next){
     })
 });
 
-//Feedings_Kitchens
+// Feedings_Kitchens
 app.get('/feedings_kitchens', function(req, res)
 {
     let query1 = `SELECT Feedings_Kitchens.feeding_kitchen_id, Feedings_Kitchens.feeding_id, 
@@ -447,7 +447,7 @@ app.get('/feedings_kitchens', function(req, res)
     })
 });
 
-// Add Feeding_Kitchen
+// Add Feedings_Kitchens
 app.post('/add-intersection-ajax', function(req, res) {
     let data = req.body;
 
@@ -476,7 +476,7 @@ app.post('/add-intersection-ajax', function(req, res) {
     })
 });
 
-// Delete Feeding_Kitchen
+// Delete Feedings_Kitchens
 app.delete('/delete-feeding-kitchen-ajax/', function(req,res,next){
     let data = req.body;
     let feeding_kitchen_id = parseInt(data.id);
@@ -498,6 +498,45 @@ app.delete('/delete-feeding-kitchen-ajax/', function(req,res,next){
                 res.sendStatus(204);
               }
   })
+});
+
+// Update Feeding_Kitchen
+app.put('/put-intersection-ajax', function(req,res,next){
+    let data = req.body;
+    
+    let feeding_kitchen_id = parseInt(data.feeding_kitchen_id);
+    let feeding_id = parseInt(data.feeding_id);
+    let kitchen_id = parseInt(data.kitchen_id);
+    
+    let queryUpdateIntersection = `UPDATE Feedings_Kitchens SET Feedings_Kitchens.feeding_id = '${feeding_id}', Feedings_Kitchens.kitchen_id = '${kitchen_id}'
+    WHERE Feedings_Kitchens.feeding_kitchen_id = '${feeding_kitchen_id}';`;
+    let selectIntersection = `SELECT * FROM Feedings_Kitchens WHERE Feedings_Kitchens.feeding_kitchen_id = '${feeding_kitchen_id}';`
+    
+            // Run the 1st query
+            db.pool.query(queryUpdateIntersection, [feeding_kitchen_id, feeding_id, kitchen_id], function(error, rows, fields){
+                if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+                }
+    
+                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // table on the front-end
+                else
+                {
+                    // Run the second query
+                    db.pool.query(selectIntersection, [feeding_kitchen_id], function(error, rows, fields) {
+    
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.send(rows);
+                        }
+                    })
+                }
+    })
 });
 
 // Kitchens
