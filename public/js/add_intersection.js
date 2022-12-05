@@ -1,3 +1,8 @@
+// Citation for the following functions: add intersection form Event Listener and addRowToTable
+// Date: 11/08/2022
+// Adapted from nodejs-starter-app
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 // Get the objects we need to modify
 let addIntersectionForm = document.getElementById('add-intersection-form-ajax');
 
@@ -20,8 +25,10 @@ addIntersectionForm.addEventListener("submit", function (e) {
         feeding_id: feedingIdValue,
         kitchen_id: kitchenIdValue
     }
+
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
+    // Using POST method
     xhttp.open("POST", "/add-intersection-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
@@ -46,8 +53,8 @@ addIntersectionForm.addEventListener("submit", function (e) {
 
 })
 
-// Creates a single row from an Object
 addRowToTable = (data) => {
+
     // Get a reference to the current table on the page and clear it out.
     let currentTable = document.getElementById("feedings-kitchens-table");
 
@@ -70,6 +77,7 @@ addRowToTable = (data) => {
     feeding_idCell.innerText = newRow.feeding_id;
     kitchen_idCell.innerText = newRow.kitchen_id;
 
+    // Create delete button
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
@@ -87,5 +95,6 @@ addRowToTable = (data) => {
     // Add the row to the table
     currentTable.appendChild(row);
 
+    // Reload window
     window.location.reload();
 }

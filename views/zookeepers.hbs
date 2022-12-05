@@ -1,4 +1,10 @@
+{{!-- Citation for the following: table and add zookeeper form --}}
+{{!-- Date: 11/08/2022 --}}
+{{!-- Adapted from nodejs-starter-app --}}
+{{!-- Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <h2>
     Zookeepers
 </h2>
@@ -6,7 +12,6 @@
 {{!-- Create a table --}}
 <table id="zookeepers-table" border="1" cellpadding="5">
 
-    {{!-- Header section --}}
     <thead>
         <tr>
             <th>Zookeeper Id</th>
@@ -16,14 +21,15 @@
         </tr>
     </thead>
 
-    {{!-- Body section --}}
     <tbody>
+        {{!-- Iterate through data from database to fill table cells --}}
         {{#each data}}
         <tr data-value={{this.zookeeper_id}}>
             <td>{{this.zookeeper_id}}</td>
             <td>{{this.first_name}}</td>
             <td>{{this.last_name}}</td>
             <td align="middle">
+                {{!-- Delete button --}}
                 <button class="delete" onClick="deleteZookeeper({{this.zookeeper_id}})">Delete</button>
             </td>
         </tr>

@@ -1,3 +1,8 @@
+// Citation for the following functions: add zookeeper form Event Listener and addRowToTable
+// Date: 11/08/2022
+// Adapted from nodejs-starter-app
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 // Get the objects we need to modify
 let addZookeeperForm = document.getElementById('add-zookeeper-form-ajax');
 
@@ -20,8 +25,10 @@ addZookeeperForm.addEventListener("submit", function (e) {
         first_name: firstnameValue,
         last_name: lastnameValue
     }
+
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
+    // Using POST method
     xhttp.open("POST", "/add-zookeeper-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
@@ -46,7 +53,6 @@ addZookeeperForm.addEventListener("submit", function (e) {
 
 })
 
-// Creates a single row from an Object
 addRowToTable = (data) => {
     // Get a reference to the current table on the page and clear it out.
     let currentTable = document.getElementById("zookeepers-table");
@@ -70,6 +76,7 @@ addRowToTable = (data) => {
     firstnameCell.innerText = newRow.first_name;
     lastnameCell.innerText = newRow.last_name;
 
+    // Create delete button
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
@@ -87,5 +94,6 @@ addRowToTable = (data) => {
     // Add the row to the table
     currentTable.appendChild(row);
 
+    // Reload window
     window.location.reload();
 }

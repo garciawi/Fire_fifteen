@@ -1,3 +1,10 @@
+{{!-- Citation for the following: table and add a diet form --}}
+{{!-- Date: 11/08/2022 --}}
+{{!-- Adapted from nodejs-starter-app --}}
+{{!-- Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <h2>
     Diets
 </h2>
@@ -5,7 +12,6 @@
 {{!-- Create a table --}}
 <table id="diets-table" border="1" cellpadding="5">
 
-    {{!-- Header section --}}
     <thead>
         <tr>
             <th>Diet ID</th>
@@ -14,13 +20,14 @@
         </tr>
     </thead>
 
-    {{!-- Body section --}}
     <tbody>
+        {{!-- Iterate through data from database to fill table cells --}}
         {{#each data}}
         <tr data-value={{this.diet_id}}>
             <td>{{this.diet_id}}</td>
             <td>{{this.diet_type}}</td>
             <td align="middle">
+                {{!-- Delete button --}}
                 <button class="delete" onClick="deleteDiet({{this.diet_id}})">Delete</button>
             </td>
         </tr>
@@ -36,7 +43,7 @@
     <fieldset class="fields">
         <legend><strong>Add a Diet</strong></legend>
 
-        <label for="input-diets-name">Diets: </label>
+        <label for="input-diets-name">Diet: </label>
         <input type="text" name="input-diets" id="input-diets"></input>
             
         <p>

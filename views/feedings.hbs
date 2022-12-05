@@ -1,17 +1,26 @@
+{{!-- Citation for the following: search a feeding form, table, add feeding form, and update feeding form --}}
+{{!-- Date: 11/08/2022 --}}
+{{!-- Adapted from nodejs-starter-app --}}
+{{!-- Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <h2>
     Feedings
 </h2>
+
 {{!-- Search for a feeding form --}}
 <form id="search-feeding-form-html" method='GET' action="/feedings">
     <fieldset class="fields">
         <legend><strong>Search Feeding</strong></legend>
-        Search feedings by species using the field below.
+        Search feedings by species using the field below. Partial names are OK too!
 
         <p>
             <label for="input-species">Species: </label>
             <input type="text" name="species" id="input-species-html-search">
         </p>
         <p>
+            {{!-- Submit and reset buttons --}}
             <input class="btn" type="submit" value="Submit">
             <button href='/feedings'>Reset</button>
         </p>
@@ -22,7 +31,6 @@
 {{!-- Create a table --}}
 <table id="feedings-table" border="1" cellpadding="5">
 
-    {{!-- Header section --}}
     <thead>
         <tr>
             <th>Feeding ID</th>
@@ -36,8 +44,8 @@
         </tr>
     </thead>
 
-    {{!-- Body section --}}
     <tbody>
+        {{!-- Iterate through data from database to fill table cells --}}
         {{#each data}}
         <tr data-value={{this.feeding_id}}>
             <td>{{this.feeding_id}}</td>
@@ -48,6 +56,7 @@
             <td>{{this.feeding_time}}</td>
             <td>{{this.feeding_description}}</td>
             <td align="middle">
+                {{!-- Delete button --}}
                 <button class="delete" onClick="deleteFeeding({{this.feeding_id}})">Delete</button>
             </td>
         </tr>
@@ -66,6 +75,7 @@
         <label for="input-species">Species: </label>
         <select name="input-species" id="input-species">
             <option>Select a Species</option>
+            {{!-- Iterate through data from species table to grab species_id and species_name --}}
             {{#each species}}
             <option value="{{this.species_id}}">{{this.species_name}}</option>
             {{/each}}
@@ -76,7 +86,9 @@
         <label for="input-zookeeper">Zookeeper: </label>
         <select name="input-zookeeper" id="input-zookeeper">
             <option>Select a Zookeeper</option>
+            {{!-- NULL value option --}}
             <option value="">&lt;None&gt;</option>
+            {{!-- Iterate through data from zookeepers table to grab zookeeper_id, first_name, and last_name --}}
             {{#each zookeepers}}
             <option value="{{this.zookeeper_id}}">{{this.first_name}} {{this.last_name}}</option>
             {{/each}}
@@ -91,7 +103,6 @@
         <p>
         <label for="input-time">Time: </label>
         <input type="time" name="input-time" id="input-time" required></input>
-        <small>Feedings are 24/7 since some of our animals are nocturnal</small>
         </p>
 
         <p>
@@ -112,14 +123,15 @@
 <form id="updateFeeding">
     <fieldset class="fields">
         <legend><strong>Update a Feeding date Form</strong></legend>
-        To update a specific feeding's date, select a new date from drop down menu.
+        Fill out form to update the a specific feeding.
 
     <p>
     <label for="input-feeding">Feeding: </label>
     <select name="input-feeding" id="mySelect">
         <option value="test">Select a Feeding</option>
+        {{!-- Iterate through data from feedings table to grab feeding_id --}}
         {{#each data}}
-        <option value="{{this.feeding_id}}">{{this.feeding_date}}</option>
+        <option value="{{this.feeding_id}}">{{this.feeding_id}}</option>
         {{/each}}
     </select>
     </P>
@@ -128,6 +140,7 @@
         <label for="input-species">Species: </label>
         <select name="input-update-species" id="input-update-species">
             <option>Select a Species</option>
+            {{!-- Iterate through data from species table to grab species_id and species_name --}}
             {{#each species}}
             <option value="{{this.species_id}}">{{this.species_name}}</option>
             {{/each}}
@@ -138,7 +151,9 @@
         <label for="input-zookeeper">Zookeeper: </label>
         <select name="input-update-zookeeper" id="input-update-zookeeper">
             <option>Select a Zookeeper</option>
+            {{!-- NULL value option --}}
             <option value="">&lt;None&gt;</option>
+            {{!-- Iterate through data from zookeepers table to grab zookeeper_id, first_name, and last_name --}}
             {{#each zookeepers}}
             <option value="{{this.zookeeper_id}}">{{this.first_name}} {{this.last_name}}</option>
             {{/each}}

@@ -1,4 +1,10 @@
+{{!-- Citation for the following: search an animal form, table, add animal form, and update animal form --}}
+{{!-- Date: 11/08/2022 --}}
+{{!-- Adapted from nodejs-starter-app --}}
+{{!-- Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <h2>
     Animals
 </h2>
@@ -15,6 +21,7 @@
         </p>
 
         <p>
+            {{!-- Submit and reset buttons --}}
             <input class="btn" type="submit" value="Submit">
             <button href='/animals'>Reset</button>
         </p>
@@ -25,7 +32,6 @@
 {{!-- Create a table --}}
 <table id="animals-table" border="1" cellpadding="5">
 
-    {{!-- Header section --}}
     <thead>
         <tr>
             <th>Animal ID</th>
@@ -36,8 +42,8 @@
         </tr>
     </thead>
 
-    {{!-- Body section --}}
     <tbody>
+        {{!-- Iterate through data from database to fill table cells --}}
         {{#each data}}
         <tr data-value={{this.animal_id}}>
             <td>{{this.animal_id}}</td>
@@ -45,6 +51,7 @@
             <td>{{this.species_id}}</td>
             <td>{{this.is_sick}}</td>
             <td align="middle">
+                {{!-- Delete button --}}
                 <button class="delete" onClick="deleteAnimal({{this.animal_id}})">Delete</button>
             </td>
         </tr>
@@ -54,7 +61,7 @@
 <script src="./js/delete_animal.js"></script>
 <p>&nbsp;</p>
 
-{{!-- Add an animal form --}}
+{{!-- Add animal form --}}
 <form id="add-animal-form-ajax">
     <fieldset class="fields">
         <legend><strong>Add Animal</strong></legend>
@@ -66,6 +73,7 @@
         <label for="input-species">Species: </label>
         <select name="input-species" id="input-species">
             <option value="">Select a Species</option>
+            {{!-- Iterate through data from species table to grab species_id and species_name --}}
             {{#each species}}
             <option value="{{this.species_id}}">{{this.species_name}}</option>
             {{/each}}
@@ -89,16 +97,17 @@
 <script src="./js/add_animal.js"></script>
 <p>&nbsp;</p>
 
-{{!-- Update Animal Form --}}
+{{!-- Update animal Form --}}
 <form id="updateAnimalSickness">
     <fieldset class="fields">
         <legend><strong>Update an Animals Sick Status Form</strong></legend>
-        To update a specific animal's sick status select their name from the drop-down menu
+        To update a specific animal's sick status, select their name from the drop-down menu
         and desired sick status.
     <p>
     <label for="input-animals">Animal: </label>
     <select name="input-animals" id="mySelect">
         <option value="test">Select an Animal</option>
+        {{!-- Iterate through data from animals table to grab animal_id and name --}}
         {{#each data}}
         <option value="{{this.animal_id}}">{{this.name}}</option>
         {{/each}}

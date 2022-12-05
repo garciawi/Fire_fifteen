@@ -1,4 +1,9 @@
-// Get the objects we need to modify
+// Citation for the following functions: add animal form Event Listener and addRowToTable
+// Date: 11/08/2022
+// Adapted from nodejs-starter-app
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
+// Get the objects we need to modify from add animal form
 let addAnimalForm = document.getElementById('add-animal-form-ajax');
 
 // Modify the objects we need
@@ -26,6 +31,7 @@ addAnimalForm.addEventListener("submit", function (e) {
 
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
+    // Using POST method
     xhttp.open("POST", "/add-animal-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
@@ -51,7 +57,6 @@ addAnimalForm.addEventListener("submit", function (e) {
 
 })
 
-// Creates a single row from an Object
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
@@ -78,6 +83,7 @@ addRowToTable = (data) => {
     speciesCell.innerText = newRow.species_name;
     issickCell.innerText = newRow.is_sick;
 
+    // Create delete button
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
@@ -105,6 +111,7 @@ addRowToTable = (data) => {
     option.value = newRow.is_sick;
     selectMenu.add(option);
 
+    // Reload window
     window.location.reload();
 
 }

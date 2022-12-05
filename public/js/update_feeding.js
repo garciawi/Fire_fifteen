@@ -1,6 +1,9 @@
+// Citation for the following functions: update feeding form Event Listener and updateRow
+// Date: 11/08/2022
+// Adapted from nodejs-starter-app
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
 // Get the objects we need to modify
-console.log("it arrived at update_feeding.js");
 let updateFeedingForm = document.getElementById('updateFeeding');
 
 // Modify the objects we need
@@ -34,10 +37,10 @@ updateFeedingForm.addEventListener("submit", function (e) {
         feeding_time: feeding_time,
         feeding_description: feeding_description
     }
- 
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
+    // Using PUT method
     xhttp.open("PUT", "/put-feeding-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
@@ -45,7 +48,7 @@ updateFeedingForm.addEventListener("submit", function (e) {
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
-            // Add the new data to the table
+            // Update table with new values
             updateRow(xhttp.response, feeding_id);
 
         }
@@ -62,22 +65,26 @@ updateFeedingForm.addEventListener("submit", function (e) {
 
 function updateRow(data, feeding_id){
     let parsedData = JSON.parse(data);
-    console.log("parsedData is", parsedData);
+
+    // Get a reference to the current table on the page and clear it out.
     let table = document.getElementById("feedings-table");
 
+    // Iterate through rows
+    // rows would be accessed using the "row" variable assigned in the for loop
     for (let i = 0, row; row = table.rows[i]; i++) {
-       //iterate through rows
-       //rows would be accessed using the "row" variable assigned in the for loop
        if (table.rows[i].getAttribute("data-value") == feeding_id) {
 
+            // Get the location of the row where we found the matching feeding_id
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
+            // Get td of each value
             let speciesTd = updateRowIndex.getElementsByTagName("td")[2];
             let zookeeperTd = updateRowIndex.getElementsByTagName("td")[3];
             let dateTd = updateRowIndex.getElementsByTagName("td")[4];
             let timeTd = updateRowIndex.getElementsByTagName("td")[5];
             let descriptionTd = updateRowIndex.getElementsByTagName("td")[6];
             
+            // Reassign each attribute to the value we updated to
             speciesTd.innerHTML = parsedData[0].species_id;
             zookeeperTd.innerHTML = parsedData[0].zookeeper_id;
             dateTd.innerHTML = parsedData[0].feeding_date;
@@ -86,5 +93,6 @@ function updateRow(data, feeding_id){
        }
     }
     
+    // Reload window
     window.location.reload();
 }

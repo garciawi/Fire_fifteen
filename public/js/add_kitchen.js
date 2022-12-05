@@ -1,3 +1,8 @@
+// Citation for the following functions: add kitchen form Event Listener and addRowToTable
+// Date: 11/08/2022
+// Adapted from nodejs-starter-app
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 // Get the objects we need to modify
 let addKitchenForm = document.getElementById('add-kitchen-form-ajax');
 
@@ -17,8 +22,10 @@ addKitchenForm.addEventListener("submit", function (e) {
     let data = {
         name: nameValue
     }
+
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
+    // Using POST method
     xhttp.open("POST", "/add-kitchen-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
@@ -42,8 +49,8 @@ addKitchenForm.addEventListener("submit", function (e) {
 
 })
 
-// Creates a single row from an Object
 addRowToTable = (data) => {
+
     // Get a reference to the current table on the page and clear it out.
     let currentTable = document.getElementById("kitchens-table");
 
@@ -63,6 +70,7 @@ addRowToTable = (data) => {
     kitchenIdCell.innerText = newRow.kitchen_id;
     nameCell.innerText = newRow.name;
 
+    // Create delete button
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
@@ -78,5 +86,6 @@ addRowToTable = (data) => {
     // Add the row to the table
     currentTable.appendChild(row);
 
+    // Reload window
     window.location.reload();
 }

@@ -1,3 +1,8 @@
+// Citation for the following functions: add feeding form Event Listener and addRowToTable
+// Date: 11/08/2022
+// Adapted from nodejs-starter-app
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
 // Get the objects we need to modify
 let addFeedingForm = document.getElementById('add-feeding-form-ajax');
 
@@ -32,6 +37,7 @@ addFeedingForm.addEventListener("submit", function (e) {
 
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
+    // Using POST method
     xhttp.open("POST", "/add-feeding-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
@@ -59,9 +65,8 @@ addFeedingForm.addEventListener("submit", function (e) {
 
 })
 
-// Creates a single row from an Object
 addRowToTable = (data) => {
-    // console.log("in add_feedings.js in addRowToTable data is:", data)
+
     // Get a reference to the current table on the page and clear it out.
     let currentTable = document.getElementById("feedings-table");
 
@@ -91,17 +96,12 @@ addRowToTable = (data) => {
     feedingTimeCell.innerText = newRow.feeding_time;
     feedingDescriptionCell.innerText = newRow.feeding_description;
 
+    // Create delete button
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
         deleteAnimal(newRow.feeding_id);
     };
-
-    // editCell = document.createElement("button");
-    // editCell.innerHTML = "Edit";
-    // editCell.onclick = function(){
-    //     editAnimal(newRow.animal_id);
-    // };
 
     // Add the cells to the row 
     row.appendChild(feedingIdCell);
@@ -119,16 +119,7 @@ addRowToTable = (data) => {
     // Add the row to the table
     currentTable.appendChild(row);
 
-    
-    // Find drop down menu, create a new option, fill data in the option,
-    // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
-
-    // let selectMenu = document.getElementById("mySelect");
-    // let option = document.createElement("option");
-    // option.text = newRow.name;
-    // option.value = newRow.is_sick;
-    // selectMenu.add(option);
-
+    // Reload window
     window.location.reload();
 
 }
