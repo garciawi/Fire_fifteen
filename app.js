@@ -1,4 +1,4 @@
-// Citation for the following function: SETUP, ROUTES, and LISTENER
+// Citation for the following functions: SETUP, ROUTES, and LISTENER
 // Date: 11/08/2022
 // Adapted from nodejs-starter-app
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
@@ -10,15 +10,15 @@ var express = require('express');   // We are using the express library for the 
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-PORT        = 9865;                  // Set a port number at the top so it's easy to change in the future
+PORT        = 9865;                  // Port number
 var db = require('./database/db-connector')
 
 const { engine } = require('express-handlebars');
-var exphbs = require('express-handlebars');     // Import express-handlebars
+var exphbs = require('express-handlebars');
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file
 
-// Static Files
+// Access to Static Files
 app.use(express.static('public'));
 
 /*
@@ -30,18 +30,18 @@ app.get('/', function (req, res) {
     res.render('index');
 });
 
-// Animals
+// Animals Page
 app.get('/animals', function(req, res)
 {
     let query1;
 
-    // If there is no query string, we just perform a basic SELECT
+    // If there is no query string, perform a basic SELECT
     if (req.query.name === undefined){
         query1 = `SELECT Animals.animal_id, Animals.name, Species.species_id, Animals.is_sick FROM Animals 
         JOIN Species ON Animals.species_id = Species.species_id
         GROUP BY Animals.animal_id ASC;`;
     }
-    // If there is a query string, we assume this is a search, and return desired results
+    // If there is a query string, assume this is a search and return desired results
     else
     {
         query1 = `SELECT * FROM Animals WHERE lower(Animals.name) LIKE "%${req.query.name}%"`
@@ -85,6 +85,8 @@ app.post('/add-animal-ajax', function(req, res) {
         if (error) {
             console.log(error)
             res.sendStatus(400);
+
+        // If there's no error, perform basic SELECT to show table
         } else {
             query2 = `SELECT Animals.animal_id, Animals.name, Species.species_name, Animals.is_sick FROM Animals 
             JOIN Species ON Animals.species_id = Species.species_id
@@ -105,28 +107,23 @@ app.post('/add-animal-ajax', function(req, res) {
 // Delete Animals
 app.delete('/delete-animal-ajax/', function(req,res,next){
     let data = req.body;
+
     let animal_id = parseInt(data.id);
     let deleteAnimals = `DELETE FROM Animals WHERE Animals.animal_id = '${animal_id}';`;
-
-  
   
           // Run the 1st query
           db.pool.query(deleteAnimals, [animal_id], function(error, rows, fields){
               if (error) {
   
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
               console.log(error);
               res.sendStatus(400);
-              }
-  
-              else
-              {
+              } else {
                 res.sendStatus(204);
               }
   })
 });
 
-// Update Animal sickness
+// Update Animals Sick Status
 app.put('/put-animal-ajax', function(req,res,next){
     let data = req.body;
     
@@ -139,17 +136,11 @@ app.put('/put-animal-ajax', function(req,res,next){
             // Run the 1st query
             db.pool.query(queryUpdateSick, [animal_id, sickStatus], function(error, rows, fields){
                 if (error) {
-    
-                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
                 console.log(error);
                 res.sendStatus(400);
-                }
-    
-                // If there was no error, we run our second query and return that data so we can use it to update the people's
-                // table on the front-end
-                else
-                {
-                    // Run the second query
+
+                // If there's no error, run second query to return new data
+                } else {
                     db.pool.query(selectAnimal, [animal_id], function(error, rows, fields) {
     
                         if (error) {
@@ -163,24 +154,22 @@ app.put('/put-animal-ajax', function(req,res,next){
     })
 });
 
-// Species
+// Species Table
 app.get('/species', function(req, res)
 {
     let query1 = `SELECT Species.species_id, Species.species_name, Diets.diet_type 
     FROM Species LEFT JOIN Diets ON Species.diet_id = Diets.diet_id
     GROUP BY Species.species_id ASC;`;
+
     let query2 = `SELECT * FROM Diets;`;
 
-    // Run the 1st query
+    // Using an array to overwrite diet_id with diet_type
     db.pool.query(query1, function(error, rows, fields){
-        
-        // Save the people
+    
         let species = rows;
         
-        // Run the second query
         db.pool.query(query2, (error, rows, fields) => {
             
-            // Save the planets
             let diets = rows;
             return res.render('species', {data: species, diets: diets});
         })
@@ -190,6 +179,7 @@ app.get('/species', function(req, res)
 // Add Species
 app.post('/add-species-ajax', function(req, res) {
     let data = req.body;
+
     query1 = `INSERT INTO Species(species_name, diet_id)
     VALUES ('${data.species_name}', '${data.diet_id}')`;
 
@@ -197,6 +187,8 @@ app.post('/add-species-ajax', function(req, res) {
         if (error) {
             console.log(error)
             res.sendStatus(400);
+
+        // If there's no error, perform basic SELECT to show table
         } else {
             query2 = `SELECT Species.species_id, Species.species_name, Diets.diet_type 
             FROM Species JOIN Diets ON Species.diet_id = Diets.diet_id
@@ -214,7 +206,7 @@ app.post('/add-species-ajax', function(req, res) {
     })
 });
 
-// Diets
+// Diets Table
 app.get('/diets', function(req, res)
 {
     let query1 = "SELECT Diets.diet_id, Diets.diet_type FROM Diets;";
@@ -235,17 +227,13 @@ app.post('/add-diets-ajax', function(req, res)
     db.pool.query(query1, function(error, rows, fields){
 
         if (error) {
-
             console.log(error)
             res.sendStatus(400);
-        }
-        else
-        {
+        } else {
             query2 = `SELECT * FROM Diets;`;
             db.pool.query(query2, function(error, rows, fields){
 
                 if (error) {
-                    
                     console.log(error);
                     res.sendStatus(400);
                 }
@@ -261,37 +249,33 @@ app.post('/add-diets-ajax', function(req, res)
 // Delete diets
 app.delete('/delete-diets-ajax/', function(req,res,next){
     let data = req.body;
+
     let diet_id = parseInt(data.id);
     let deleteDiets = `DELETE FROM Diets WHERE Diets.diet_id = '${diet_id}';`;
 
-  
-  
-          // Run the 1st query
           db.pool.query(deleteDiets, [diet_id], function(error, rows, fields){
               if (error) {
   
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
               console.log(error);
               res.sendStatus(400);
-              }
-  
-              else
-              {
+              } else {
                 res.sendStatus(204);
               }
   })
 });
 
-// Feedings
+// Feedings Table
 app.get('/feedings', function(req, res)
 {
     let query1;
-    // If there is no query string, we just perform a basic SELECT
+
+    // If there is no query string, perform a basic SELECT
     if (req.query.species === undefined){
         query1 = `SELECT Feedings.feeding_id, Feedings.species_id, Species.species_name, Feedings.zookeeper_id, 
         DATE_FORMAT(Feedings.feeding_date, "%Y-%m-%d") AS "feeding_date", Feedings.feeding_time, Feedings.feeding_description 
         FROM Feedings INNER JOIN Species ON Feedings.species_id = Species.species_id;`;
     }
+     // If there is a query string, assume this is a search and return desired results
     else
     {
         query1 = `SELECT Feedings.feeding_id, Feedings.species_id, Species.species_name, Feedings.zookeeper_id, 
@@ -303,6 +287,7 @@ app.get('/feedings', function(req, res)
     let query2 = "SELECT * FROM Zookeepers;";
     let query3 = "SELECT * FROM Species;";
     
+    // Using an array to pass species_name and zookeepers table to fill dropdown
     db.pool.query(query1, function(error, rows, fields){
         let feedings = rows;
 
@@ -319,12 +304,11 @@ app.get('/feedings', function(req, res)
     })
 });
 
-
-// Add Feeding
+// Add Feedings
 app.post('/add-feeding-ajax', function(req, res) {
     let data = req.body;
 
-    //Capture NULL values for Zookeeper
+    // Capture NULL values for Zookeeper
     let zookeeper_id = parseInt(data.zookeeper_id);
     if (isNaN(zookeeper_id)) {
         zookeeper_id = 'NULL'
@@ -337,16 +321,18 @@ app.post('/add-feeding-ajax', function(req, res) {
         if (error) {
             console.log(error)
             res.sendStatus(400);
+
+        // If there's no error, perform basic SELECT to show table
         } else {
             let query2 = `SELECT Feedings.feeding_id, Feedings.species_id, Species.species_name, Feedings.zookeeper_id, 
                     DATE_FORMAT(Feedings.feeding_date, "%Y-%m-%d") AS "feeding_date", Feedings.feeding_time, Feedings.feeding_description 
                     FROM Feedings INNER JOIN Species ON Feedings.species_id = Species.species_id;`;
+
             db.pool.query(query2, function(error, rows, fields){
                 if (error) {
                     console.log(error);
                     res.sendStatus(400);
                 } else {
-                    //console.log("after query2 is called rows is", rows)
                     res.send(rows);
                 }
             })
@@ -354,29 +340,28 @@ app.post('/add-feeding-ajax', function(req, res) {
     })
 });
 
-// Delete Feeding
+// Delete Feedings
 app.delete('/delete-feeding-ajax/', function(req,res,next){
     let data = req.body;
+
     let feeding_id = parseInt(data.id);
     let deleteFeeding = `DELETE FROM Feedings WHERE Feedings.feeding_id = '${feeding_id}';`;
-          // Run the 1st query
+
           db.pool.query(deleteFeeding, [feeding_id], function(error, rows, fields){
               if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
               console.log(error);
               res.sendStatus(400);
-              }
-  
-              else
-              {
+
+              } else {
                 res.sendStatus(204);
               }
-  })});
+  })
+});
 
-// Update Feeding
+// Update Feedings
 app.put('/put-feeding-ajax', function(req,res,next){
     let data = req.body;
+
     let feeding_id = parseInt(data.feeding_id);
     let species_id = data.species_id;
     let zookeeper_id = data.zookeeper_id;
@@ -388,22 +373,17 @@ app.put('/put-feeding-ajax', function(req,res,next){
     SET Feedings.species_id = '${species_id}', Feedings.zookeeper_id = '${zookeeper_id}', Feedings.feeding_date = '${feeding_date}',
     Feedings.feeding_time = '${feeding_time}', Feedings.feeding_description = '${feeding_description}'
     WHERE Feedings.feeding_id = '${feeding_id}';`;
+
     let selectFeeding = `SELECT * FROM Feedings WHERE Feedings.feeding_id = '${feeding_id}';`
     
             // Run the 1st query
             db.pool.query(queryUpdateFeeding, [feeding_id, species_id, zookeeper_id, feeding_date, feeding_time, feeding_description], function(error, rows, fields){
                 if (error) {
-    
-                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
                 console.log(error);
                 res.sendStatus(400);
-                }
-    
-                // If there was no error, we run our second query and return that data so we can use it to update the people's
-                // table on the front-end
-                else
-                {
-                    // Run the second query
+
+                // If there's no error, run second query to return new data
+                } else {
                     db.pool.query(selectFeeding, [feeding_id], function(error, rows, fields) {
     
                         if (error) {
@@ -417,7 +397,7 @@ app.put('/put-feeding-ajax', function(req,res,next){
     })
 });
 
-// Feedings_Kitchens
+// Feedings_Kitchens Table
 app.get('/feedings_kitchens', function(req, res)
 {
     let query1 = `SELECT Feedings_Kitchens.feeding_kitchen_id, Feedings_Kitchens.feeding_id, 
@@ -429,6 +409,7 @@ app.get('/feedings_kitchens', function(req, res)
 
     let query3 = `SELECT * FROM Kitchens;`;
 
+    // Using an array to pass feeding_id and kitchens table to fill dropdown
     db.pool.query(query1, function(error, rows, fields){
 
         let feedings_kitchens = rows;
@@ -479,22 +460,16 @@ app.post('/add-intersection-ajax', function(req, res) {
 // Delete Feedings_Kitchens
 app.delete('/delete-feeding-kitchen-ajax/', function(req,res,next){
     let data = req.body;
+
     let feeding_kitchen_id = parseInt(data.id);
     let deleteFeedingKitchen = `DELETE FROM Feedings_Kitchens WHERE Feedings_Kitchens.feeding_kitchen_id = '${feeding_kitchen_id}';`;
 
-  
-  
-          // Run the 1st query
           db.pool.query(deleteFeedingKitchen, [feeding_kitchen_id], function(error, rows, fields){
               if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
               console.log(error);
               res.sendStatus(400);
-              }
-  
-              else
-              {
+
+              } else {
                 res.sendStatus(204);
               }
   })
@@ -510,22 +485,17 @@ app.put('/put-intersection-ajax', function(req,res,next){
     
     let queryUpdateIntersection = `UPDATE Feedings_Kitchens SET Feedings_Kitchens.feeding_id = '${feeding_id}', Feedings_Kitchens.kitchen_id = '${kitchen_id}'
     WHERE Feedings_Kitchens.feeding_kitchen_id = '${feeding_kitchen_id}';`;
+
     let selectIntersection = `SELECT * FROM Feedings_Kitchens WHERE Feedings_Kitchens.feeding_kitchen_id = '${feeding_kitchen_id}';`
-    
+
             // Run the 1st query
             db.pool.query(queryUpdateIntersection, [feeding_kitchen_id, feeding_id, kitchen_id], function(error, rows, fields){
                 if (error) {
-    
-                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
                 console.log(error);
                 res.sendStatus(400);
-                }
-    
-                // If there was no error, we run our second query and return that data so we can use it to update the people's
-                // table on the front-end
-                else
-                {
-                    // Run the second query
+
+                // If there's no error, run second query to return new data
+                } else {
                     db.pool.query(selectIntersection, [feeding_kitchen_id], function(error, rows, fields) {
     
                         if (error) {
@@ -539,7 +509,7 @@ app.put('/put-intersection-ajax', function(req,res,next){
     })
 });
 
-// Kitchens
+// Kitchens Table
 app.get('/kitchens', function(req, res)
 {
     let query1 = "SELECT * FROM Kitchens;";
@@ -583,21 +553,18 @@ app.delete('/delete-kitchen-ajax', function(req,res,next){
     let kitchen_id = parseInt(data.id);
     let deleteKitchen = `DELETE FROM Kitchens WHERE kitchen_id = '${kitchen_id}';`;
 
-          // Run the 1st query
           db.pool.query(deleteKitchen, [kitchen_id], function(error, rows, fields){
               if (error) {
-  
               console.log(error);
               res.sendStatus(400);
-              }
-  
-              else
-              {
+
+              } else {
                 res.sendStatus(204);
               }
-  })});
+  })
+});
 
-//Zookeepers
+// Zookeepers Table
 app.get('/zookeepers', function(req, res)
 {
     let query1 = "SELECT * FROM Zookeepers GROUP BY Zookeepers.zookeeper_id ASC;";
@@ -619,6 +586,7 @@ app.post('/add-zookeeper-ajax', function(req, res) {
         if (error) {
             console.log(error)
             res.sendStatus(400);
+
         } else {
             query2 = `SELECT * FROM Zookeepers
             GROUP BY Zookeepers.zookeeper_id ASC;`;
@@ -642,24 +610,22 @@ app.delete('/delete-zookeeper-ajax', function(req,res,next){
     let zookeeper_id = parseInt(data.id);
     let deleteZookeepers = `DELETE FROM Zookeepers WHERE Zookeepers.zookeeper_id = '${zookeeper_id}';`;
 
-          // Run the 1st query
           db.pool.query(deleteZookeepers, [zookeeper_id], function(error, rows, fields){
               if (error) {
-  
               console.log(error);
               res.sendStatus(400);
-              }
-  
-              else
-              {
+
+              } else {
                 res.sendStatus(204);
               }
-  })});
+  })
+});
 
 
 /*
     LISTENER
 */
-app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
+// This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
+app.listen(PORT, function(){
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });

@@ -1,3 +1,10 @@
+{{!-- Citation for the following: table and add a species form --}}
+{{!-- Date: 11/08/2022 --}}
+{{!-- Adapted from nodejs-starter-app --}}
+{{!-- Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <h2>
     Species
 </h2>
@@ -5,7 +12,6 @@
 {{!-- Create a table --}}
 <table  id="species-table" border="1" cellpadding="5">
 
-    {{!-- Header section --}}
     <thead>
         <tr>
             <th>Species ID</th>
@@ -14,8 +20,8 @@
         </tr>
     </thead>
 
-    {{!-- Body section --}}
     <tbody>
+        {{!-- Iterate through data from database to fill table cells --}}
         {{#each data}}
         <tr>
             <td>{{this.species_id}}</td>
@@ -25,8 +31,8 @@
         {{/each}}
     </tbody>
 </table>
-
 <p>&nbsp;</p>
+
 {{!-- Add a species form --}}
 <form id="add-species-form-ajax">
     <fieldset class="fields">
@@ -39,6 +45,7 @@
         <label for="input-diet">Diet Type: </label>
         <select name="input-diet" id="input-diet">
             <option>Select a Diet</option>
+            {{!-- Iterate through data from diets table to grab diet_type --}}
             {{#each diets}}
             <option value="{{this.diet_id}}">{{this.diet_type}}</option>
             {{/each}}
