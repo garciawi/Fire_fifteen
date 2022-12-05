@@ -1,4 +1,4 @@
-/* source: https://www.w3schools.com/howto/howto_js_topnav.asp */
+/* CSS for Fire Zoo website project */
 
 body {
     color: #ff9101;
@@ -9,31 +9,31 @@ body {
 .navigation {
     background-color: rgb(247, 111, 111);
     overflow: hidden;
+    padding: 8px;
 }
+
+.description {
+  color: black;
+}
+
+/* Citation for the following: .navigation a, .navigation a:hover and .navigation a.active 
+// Date: 12/05/2022
+// Adapted from How TO - Top Navigation
+// Source URL: https://www.w3schools.com/howto/howto_js_topnav.asp */
+
 .navigation a {
-    color: #f2f2f2;
-    padding: 16px;
-    font-size: 17px;
-    
-  }
-  
-  /* Change the color of links on hover */
+  color: white;
+  padding: 16px;
+  font-size: 17px;
+}
+
 .navigation a:hover {
     background-color: orange;
     color: black;
-  }
+}
   
-  /* Add a color to the active/current link */
-  .navigation a.active {
-    background: #f2f2f2;
-    color: rgb(243, 151, 12);
-  }
 
-/* form {
-    margin: 20px;
-} */
-
-/* div {
-    background-color: red;
-
-} */
+.navigation a.active {
+  background: #f2f2f2;
+  color: rgb(243, 151, 12);
+}
