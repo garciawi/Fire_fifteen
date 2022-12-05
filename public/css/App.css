@@ -1,0 +1,37 @@
+body {
+    color: #ff9101;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+  }
+
+.navigation {
+    background-color: rgb(247, 111, 111);
+    overflow: hidden;
+}
+.navigation a {
+    color: #f2f2f2;
+    padding: 16px;
+    font-size: 17px;
+    
+  }
+  
+  /* Change the color of links on hover */
+.navigation a:hover {
+    background-color: orange;
+    color: black;
+  }
+  
+  /* Add a color to the active/current link */
+  .navigation a.active {
+    background: #f2f2f2;
+    color: rgb(243, 151, 12);
+  }
+
+/* form {
+    margin: 20px;
+} */
+
+/* div {
+    background-color: red;
+
+} */
